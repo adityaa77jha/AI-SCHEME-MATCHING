@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSFDC Concessional Credit Portal - AI & Voice Powered</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS & JS for Mapping -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    #map { height: 350px; width: 100%; border-radius: 0.5rem; }
+    .recording-pulse {
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans pb-12">
+
+  <!-- Navigation / Header -->
+  <header class="bg-indigo-900 text-white py-4 shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+          <span>🏛️</span> NSFDC Beneficiary Credit Portal
+        </h1>
+        <p class="text-indigo-200 text-xs md:text-sm">Concessional Credit Platform with AI & Voice Assistance</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="authBtn" onclick="toggleAuthModal()" class="bg-indigo-700 hover:bg-indigo-600 px-3 py-1.5 rounded text-xs md:text-sm font-semibold transition border border-indigo-500">
+          Login / Register
+        </button>
+        <select id="langSelect" class="bg-indigo-800 text-white border border-indigo-600 rounded px-2 py-1 text-xs md:text-sm">
+          <option value="en-IN">English</option>
+          <option value="hi-IN">हिन्दी (Hindi)</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- User Banner (Logged In State) -->
+  <div id="userProfileBanner" class="hidden bg-indigo-100 border-b border-indigo-200 py-2">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center text-xs md:text-sm text-indigo-900">
+      <span>Welcome back, <strong id="loggedInUserName">Beneficiary</strong> | SQL Sync Status: <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded font-bold">Connected (PostgreSQL Emulated)</span></span>
+      <button onclick="logout()" class="text-red-600 hover:underline font-semibold">Logout</button>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 mt-6 space-y-8">
+
+    <!-- Voice Control Bar -->
+    <section class="bg-gradient-to-r from-indigo-800 to-indigo-900 text-white rounded-xl p-5 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="space-y-1">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+          <span>🎙️</span> Hands-Free Voice Assistant
+        </h2>
+        <p class="text-xs text-indigo-200">
+          Click the mic and describe your project naturally (e.g., "I need a loan of 1 lakh 20 thousand for a small retail shop").
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="micBtn" onclick="toggleVoiceInput()" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2.5 rounded-full flex items-center gap-2 shadow transition">
+          <span id="micIcon">🎤</span> <span id="micStatusText">Speak Profile</span>
+        </button>
+        <button id="readAloudBtn" onclick="speakCurrentRecommendation()" class="bg-indigo-700 hover:bg-indigo-600 text-white font-semibold px-3 py-2.5 rounded-full flex items-center gap-2 shadow transition border border-indigo-500 text-xs">
+          <span>🔊</span> Read Recommendations
+        </button>
+      </div>
+    </section>
+
+    <!-- 1. Smart Scheme Recommender Form -->
+    <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-indigo-900">1. Smart Scheme Eligibility Recommender</h2>
+        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-mono">Backend Engine: Active</span>
+      </div>
+
+      <form id="recommenderForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Target Category</label>
+          <select id="projectCategory" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+            <option value="micro">Micro Finance Scheme (MFS)</option>
+            <option value="term">Term Loan Scheme (Large Project)</option>
+            <option value="education">Educational Loan Scheme (ELS)</option>
+            <option value="aajeevika">Aajeevika Micro-Finance (NBFC-MFI)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Estimated Project Cost (₹)</label>
+          <input type="number" id="projectCost" value="120000" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Annual Household Income (₹)</label>
+          <input type="number" id="familyIncome" value="250000" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Gender Concession</label>
+          <select id="gender" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+            <option value="male">Male</option>
+            <option value="female">Female (0.5% Interest Rebate)</option>
+          </select>
+        </div>
+        <div class="md:col-span-2 lg:col-span-4 mt-2 flex gap-3">
+          <button type="button" onclick="recommendScheme()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition shadow">
+            Evaluate Eligibility & Schemes
+          </button>
+          <button type="button" onclick="saveApplicationToSQL()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2.5 rounded-lg transition shadow flex items-center gap-1 text-sm">
+            💾 Save Application
+          </button>
+        </div>
+      </form>
+
+      <!-- Scheme Result Card -->
+      <div id="schemeResult" class="mt-6 bg-indigo-50 rounded-lg p-5 border border-indigo-100 space-y-2">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- 2 & 3 Split Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- 2. Financial EMI & Moratorium Calculator -->
+      <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+        <h2 class="text-xl font-bold text-indigo-900 mb-4">2. Scheme Quarterly EMI & Moratorium Calculator</h2>
+        
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div>
+              <span class="block text-xs text-slate-500">Eligible Loan Principal</span>
+              <strong id="principalVal" class="text-indigo-900 text-base">₹0</strong>
+              <span class="block text-[10px] text-slate-400">(90% of Project Cost)</span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500">Applied Concessional Interest</span>
+              <strong id="rateVal" class="text-indigo-900 text-base">0% p.a.</strong>
+              <span class="block text-[10px] text-slate-400">(NSFDC Subsidized Rate)</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm font-medium text-slate-700 mb-1">
+              <span>Repayment Tenure (Years)</span>
+              <span id="tenureVal" class="font-bold text-indigo-700">3 Years</span>
+            </div>
+            <input type="range" id="tenure" min="1" max="12" value="3" class="w-full accent-indigo-600" oninput="calculateEMI()">
+            <div class="flex justify-between text-xs text-slate-400"><span>1 Year</span><span>12 Years</span></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Moratorium Period (Grace Months)</label>
+            <select id="moratorium" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm" onchange="calculateEMI()">
+              <option value="3">3 Months (Micro Finance Standard)</option>
+              <option value="6">6 Months (Term Loan Standard)</option>
+              <option value="12">12 Months (Construction/Education)</option>
+            </select>
+          </div>
+
+          <!-- EMI Amortization Summary -->
+          <div class="bg-indigo-950 text-white rounded-lg p-4 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-indigo-200">Quarterly EMI Installment:</span>
+              <strong id="quarterlyEmi" class="text-xl text-green-400">₹0</strong>
+            </div>
+            <hr class="border-indigo-800">
+            <div class="flex justify-between text-xs text-indigo-300">
+              <span>Total Accrued Interest:</span>
+              <strong id="totalInterest" class="text-white">₹0</strong>
+            </div>
+            <div class="flex justify-between text-xs text-indigo-300">
+              <span>Total Payable Amount:</span>
+              <strong id="totalPayment" class="text-white">₹0</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Geo-Spatial Partner Locator -->
+      <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-2">
+            <h2 class="text-xl font-bold text-indigo-900">3. Nearby Eligible Channel Partners</h2>
+            <span class="text-xs bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded">NPA Filter Active</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-4">
+            Filters state agencies, banks, and MFIs by location and fund availability (excluding institutions with high NPA overdues).
+          </p>
+
+          <!-- Map Element -->
+          <div id="map"></div>
+        </div>
+
+        <div class="mt-4 flex justify-between items-center text-xs text-slate-500 border-t pt-3">
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-green-600 inline-block"></span> Active Channel Partner</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600 inline-block"></span> High Overdue / Restricted</span>
+        </div>
+      </section>
+      
+    </div>
+
+    <!-- Saved Applications Section (Simulated SQL Records) -->
+    <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+      <h2 class="text-lg font-bold text-indigo-900 mb-3 flex items-center gap-2">
+        <span>🗄️</span> Saved Applications Database (SQL Store)
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b">
+              <th class="p-2.5">App ID</th>
+              <th class="p-2.5">User / Applicant</th>
+              <th class="p-2.5">Recommended Scheme</th>
+              <th class="p-2.5">Project Cost</th>
+              <th class="p-2.5">Loan Sanction (90%)</th>
+              <th class="p-2.5">Quarterly EMI</th>
+              <th class="p-2.5">Status</th>
+            </tr>
+          </thead>
+          <tbody id="sqlApplicationsTable">
+            <tr>
+              <td colspan="7" class="p-4 text-center text-slate-400">No applications saved yet. Authenticate and click "Save Application".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Login / Register Modal -->
+  <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-slate-200">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-lg font-bold text-indigo-900">Beneficiary Portal Authentication</h3>
+        <button onclick="toggleAuthModal()" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+      </div>
+      
+      <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
+          <input type="text" id="authName" required value="Ramesh Kumar" class="w-full border rounded-lg p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+          <input type="email" id="authEmail" required value="ramesh@example.com" class="w-full border rounded-lg p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Password</label>
+          <input type="password" required value="••••••••" class="w-full border rounded-lg p-2 text-sm">
+        </div>
+        <p class="text-[11px] text-slate-400">Simulates user registration & SQL password hashing via bcrypt backend.</p>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition text-sm">
+          Login / Register Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Embedded NSFDC Scheme Rules Master Data
+    const SCHEMES = {
+      micro: { name: "Micro Finance Scheme (MFS)", maxCost: 140000, loanPct: 0.90, baseRate: 6.5, maxTenure: 3, defaultMoratorium: 3 },
+      term: { name: "Term Loan Scheme", maxCost: 5000000, loanPct: 0.90, baseRate: 8.0, maxTenure: 7, defaultMoratorium: 6 },
+      education: { name: "Educational Loan Scheme (ELS)", maxCost: 4000000, loanPct: 0.90, baseRate: 6.5, maxTenure: 12, defaultMoratorium: 12 },
+      aajeevika: { name: "Aajeevika Micro-Finance (NBFC-MFI)", maxCost: 140000, loanPct: 0.90, baseRate: 15.0, maxTenure: 3, defaultMoratorium: 3 }
+    };
+
+    // Geo-Spatial Channel Partner Dataset
+    const PARTNERS = [
+      { name: "Delhi SC/ST Finance Development Corp (SCA)", lat: 28.6139, lng: 77.2090, status: "Eligible", npa: "1.2%", type: "SCA" },
+      { name: "Punjab National Bank - Central Branch", lat: 28.6328, lng: 77.2197, status: "Eligible", npa: "2.1%", type: "PSB" },
+      { name: "State Bank of India - Regional Micro Unit", lat: 28.5494, lng: 77.2001, status: "Eligible", npa: "0.8%", type: "PSB" },
+      { name: "Sutra Microfinance Agency", lat: 28.6500, lng: 77.1200, status: "Ineligible (High Overdues)", npa: "8.5%", type: "NBFC-MFI" }
+    ];
+
+    // State Variables
+    let activeScheme = SCHEMES.micro;
+    let activeLoanAmount = 0;
+    let activeInterestRate = 0;
+    let currentUser = null;
+    let isRecording = false;
+    let speechRecognitionInstance = null;
+    let savedApplications = [];
+
+    // --- Scheme Recommendation Engine ---
+    function recommendScheme() {
+      const category = document.getElementById("projectCategory").value;
+      const cost = parseFloat(document.getElementById("projectCost").value) || 0;
+      const income = parseFloat(document.getElementById("familyIncome").value) || 0;
+      const isFemale = document.getElementById("gender").value === "female";
+
+      const resBox = document.getElementById("schemeResult");
+
+      if (income > 500000) {
+        resBox.innerHTML = `
+          <div class="p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm font-semibold">
+            🚫 Income Cap Exceeded: Annual household income must be within ₹5.00 Lakhs to qualify for NSFDC concessional credit.
+          </div>`;
+        return;
+      }
+
+      activeScheme = SCHEMES[category];
+      activeLoanAmount = Math.min(cost * activeScheme.loanPct, activeScheme.maxCost * activeScheme.loanPct);
+      activeInterestRate = isFemale ? activeScheme.baseRate - 0.5 : activeScheme.baseRate;
+
+      resBox.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="bg-indigo-600 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-bold">Recommended Match</span>
+          <span class="text-xs text-indigo-700 font-semibold">Interest Subsidized</span>
+        </div>
+        <h3 class="font-bold text-slate-800 text-lg">${activeScheme.name}</h3>
+        <p class="text-xs text-slate-600">Max Loan Coverage (90%): <strong>₹${activeLoanAmount.toLocaleString('en-IN')}</strong></p>
+        <p class="text-xs text-slate-600">Interest Rate: <strong>${activeInterestRate}% p.a.</strong> ${isFemale ? '<span class="text-emerald-700 font-bold">(0.5% Female Concession Applied)</span>' : ''}</p>
+      `;
+
+      // Update Calculator Parameters
+      document.getElementById("tenure").max = activeScheme.maxTenure;
+      document.getElementById("tenure").value = activeScheme.maxTenure;
+      document.getElementById("tenureVal").innerText = `${activeScheme.maxTenure} Years`;
+      document.getElementById("moratorium").value = activeScheme.defaultMoratorium;
+
+      calculateEMI();
+    }
+
+    // --- Financial Quarterly EMI Calculator ---
+    function calculateEMI() {
+      const tenureYears = parseInt(document.getElementById("tenure").value);
+      document.getElementById("tenureVal").innerText = `${tenureYears} Years`;
+      
+      const P = activeLoanAmount;
+      const annualRate = activeInterestRate;
+      
+      document.getElementById("principalVal").innerText = `₹${P.toLocaleString('en-IN')}`;
+      document.getElementById("rateVal").innerText = `${annualRate}% p.a.`;
+
+      if (P <= 0) return;
+
+      const totalQuarters = tenureYears * 4;
+      const r = (annualRate / 100) / 4; // Quarterly rate
+
+      const quarterlyEMI = (P * r * Math.pow(1 + r, totalQuarters)) / (Math.pow(1 + r, totalQuarters) - 1);
+      const totalPayment = quarterlyEMI * totalQuarters;
+      const totalInterest = totalPayment - P;
+
+      document.getElementById("quarterlyEmi").innerText = `₹${Math.round(quarterlyEMI).toLocaleString('en-IN')}`;
+      document.getElementById("totalInterest").innerText = `₹${Math.round(totalInterest).toLocaleString('en-IN')}`;
+      document.getElementById("totalPayment").innerText = `₹${Math.round(totalPayment).toLocaleString('en-IN')}`;
+    }
+
+    // --- Voice Features (Speech-To-Text & Text-To-Speech) ---
+    function toggleVoiceInput() {
+      const micBtn = document.getElementById("micBtn");
+      const micStatus = document.getElementById("micStatusText");
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert("Web Speech API is not supported in this browser. Please use Google Chrome or Edge.");
+        return;
+      }
+
+      if (isRecording) {
+        speechRecognitionInstance.stop();
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = "Speak Profile";
+        return;
+      }
+
+      speechRecognitionInstance = new SpeechRecognition();
+      const selectedLang = document.getElementById("langSelect").value;
+      speechRecognitionInstance.lang = selectedLang;
+      speechRecognitionInstance.interimResults = false;
+
+      speechRecognitionInstance.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add("recording-pulse");
+        micStatus.innerText = "Listening...";
+      };
+
+      speechRecognitionInstance.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        console.log("Transcribed speech:", transcript);
+        parseSpokenInput(transcript);
+        
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = "Speak Profile";
+      };
+
+      speechRecognitionInstance.onerror = () => {
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = "Speak Profile";
+      };
+
+      speechRecognitionInstance.start();
+    }
+
+    function parseSpokenInput(text) {
+      // Natural speech parser
+      if (text.includes("education") || text.includes("study") || text.includes("college")) {
+        document.getElementById("projectCategory").value = "education";
+      } else if (text.includes("term") || text.includes("large") || text.includes("factory")) {
+        document.getElementById("projectCategory").value = "term";
+      } else if (text.includes("mfi") || text.includes("aajeevika")) {
+        document.getElementById("projectCategory").value = "aajeevika";
+      } else {
+        document.getElementById("projectCategory").value = "micro";
+      }
+
+      // Extract numbers for project cost
+      const matches = text.match(/\d+/g);
+      if (matches && matches.length > 0) {
+        let extractedVal = parseInt(matches[0]);
+        if (text.includes("lakh") || text.includes("lac")) {
+          extractedVal *= 100000;
+        } else if (text.includes("thousand")) {
+          extractedVal *= 1000;
+        }
+        document.getElementById("projectCost").value = extractedVal;
+      }
+      if (text.includes("female") || text.includes("woman") || text.includes("lady")) {
+        document.getElementById("gender").value = "female";
+      }
+      recommendScheme();
+      announceVoiceMessage("Speech recognized. Scheme recommended automatically.");
+    }
+    function speakCurrentRecommendation() {
+      const text = `You are eligible for the ${activeScheme.name}. Maximum loan coverage is ${activeLoanAmount} rupees at an interest rate of ${activeInterestRate} percent per annum.`;
+      announceVoiceMessage(text);
+    }
+    function announceVoiceMessage(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Clear queue
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = document.getElementById("langSelect").value;
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+    function toggleAuthModal() {
+      document.getElementById("authModal").classList.toggle("hidden");
+    }
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("authName").value;
+      const email = document.getElementById("authEmail").value;
+
+      currentUser = { name, email };
+      document.getElementById("loggedInUserName").innerText = name;
+      document.getElementById("userProfileBanner").classList.remove("hidden");
+      document.getElementById("authBtn").innerText = "Account Active";
+      
+      toggleAuthModal();
+      announceVoiceMessage(`Welcome ${name}. You are logged in.`);
+    }
+    function logout() {
+      currentUser = null;
+      document.getElementById("userProfileBanner").classList.add("hidden");
+      document.getElementById("authBtn").innerText = "Login / Register";
+    }
+    function saveApplicationToSQL() {
+      if (!currentUser) {
+        alert("Please login first to save applications to the database.");
+        toggleAuthModal();
+        return;
+      }
+      const emiVal = document.getElementById("quarterlyEmi").innerText;
+      const newApp = {
+        id: `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        user: currentUser.name,
+        scheme: activeScheme.name,
+        cost: `₹${parseFloat(document.getElementById("projectCost").value).toLocaleString('en-IN')}`,
+        loan: `₹${activeLoanAmount.toLocaleString('en-IN')}`,
+        emi: emiVal,
+        status: "Submitted to SCA"
+      };
+      savedApplications.push(newApp);
+      renderSQLApplicationsTable();
+      alert("Application record inserted into SQL database successfully!");
+    }
+    function renderSQLApplicationsTable() {
+      const tbody = document.getElementById("sqlApplicationsTable");
+      if (savedApplications.length === 0) return;
+
+      tbody.innerHTML = savedApplications.map(app => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-2.5 font-mono font-bold text-indigo-700">${app.id}</td>
+          <td class="p-2.5">${app.user}</td>
+          <td class="p-2.5 font-semibold">${app.scheme}</td>
+          <td class="p-2.5">${app.cost}</td>
+          <td class="p-2.5 text-emerald-700 font-bold">${app.loan}</td>
+          <td class="p-2.5 font-semibold">${app.emi}</td>
+          <td class="p-2.5"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold">${app.status}</span></td>
+        </tr>
+      `).join('');
+    }
+    function initMap() {
+      const map = L.map('map').setView([28.6139, 77.2090], 11);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      PARTNERS.forEach(partner => {
+        const isEligible = partner.status.includes("Eligible");
+        const color = isEligible ? "green" : "red";
+        const circle = L.circleMarker([partner.lat, partner.lng], {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.8,
+          radius: 8
+        }).addTo(map);
+        circle.bindPopup(`
+          <div class="text-xs">
+            <strong class="text-sm">${partner.name}</strong><br/>
+            Institutional Category: <b>${partner.type}</b><br/>
+            NPA Ratio: <b>${partner.npa}</b><br/>
+            Status: <span class="${isEligible ? 'text-green-700' : 'text-red-600'} font-bold">${partner.status}</span>
+          </div>
+        `);
+      });
+    }
+    window.onload = () => {
+      recommendScheme();
+      initMap();
+    };
+  </script>
+</body>
+</html>
