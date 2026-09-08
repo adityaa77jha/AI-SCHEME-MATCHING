@@ -187,12 +187,25 @@
             <h2 class="text-xl font-bold text-indigo-900" data-i18n="locatorHeading">3. Nearby Eligible Channel Partners</h2>
             <span class="text-xs bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded" data-i18n="npaFilter">NPA Filter Active</span>
           </div>
-          <p class="text-xs text-slate-500 mb-4" data-i18n="locatorDesc">
+          <p class="text-xs text-slate-500 mb-3" data-i18n="locatorDesc">
             Filters state agencies, banks, and MFIs by location and fund availability (excluding institutions with high NPA overdues).
           </p>
 
+          <div class="flex items-center gap-2 mb-3">
+            <button id="locateMeBtn" onclick="locateUser()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg shadow flex items-center gap-1.5 transition">
+              <span>📍</span> <span data-i18n="locateMeBtn">Use My Location</span>
+            </button>
+            <span id="locateStatus" class="text-xs text-slate-500"></span>
+          </div>
+
           <!-- Map Element -->
           <div id="map"></div>
+
+          <!-- Nearest Partners List -->
+          <div id="nearestPartnersList" class="hidden mt-4 space-y-2">
+            <h3 class="text-xs font-bold text-slate-600 uppercase" data-i18n="nearestHeading">Nearest Partners to You</h3>
+            <div id="nearestPartnersItems" class="space-y-1.5"></div>
+          </div>
         </div>
 
         <div class="mt-4 flex justify-between items-center text-xs text-slate-500 border-t pt-3">
@@ -243,15 +256,21 @@
       <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-3">
         <div>
           <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="fullNameLabel">Full Name</label>
-          <input type="text" id="authName" required value="Ramesh Kumar" class="w-full border rounded-lg p-2 text-sm">
+          <input type="text" id="authName" required placeholder="Ramesh Kumar" class="w-full border rounded-lg p-2 text-sm">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="emailLabel">Email Address</label>
-          <input type="email" id="authEmail" required value="ramesh@example.com" class="w-full border rounded-lg p-2 text-sm">
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="emailLabel">Gmail Address</label>
+          <input type="email" id="authEmail" required placeholder="ramesh@gmail.com" pattern=".+@gmail\.com" title="Please enter a valid Gmail address" class="w-full border rounded-lg p-2 text-sm">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="passwordLabel">Password</label>
-          <input type="password" required value="••••••••" class="w-full border rounded-lg p-2 text-sm">
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="incomeLabel">Annual Household Income (₹)</label>
+          <input type="number" id="authIncome" required min="0" placeholder="250000" class="w-full border rounded-lg p-2 text-sm">
+          <p class="text-[10px] text-slate-400 mt-1" data-i18n="incomeAutofillNote">Saved to your profile so you won't need to re-enter it each time.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="passwordLabel">Portal Password</label>
+          <input type="password" id="authPassword" required placeholder="••••••••" class="w-full border rounded-lg p-2 text-sm">
+          <p class="text-[10px] text-amber-600 mt-1" data-i18n="passwordSecurityNote">⚠️ Create a password just for this portal — never enter your real Gmail password here.</p>
         </div>
         <p class="text-[11px] text-slate-400" data-i18n="authNote">Simulates user registration & SQL password hashing via bcrypt backend.</p>
         <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition text-sm" data-i18n="authSubmitBtn">
@@ -328,6 +347,13 @@
         locatorDesc: "Filters state agencies, banks, and MFIs by location and fund availability (excluding institutions with high NPA overdues).",
         activePartner: "Active Channel Partner",
         restrictedPartner: "High Overdue / Restricted",
+        locateMeBtn: "Use My Location",
+        nearestHeading: "Nearest Partners to You",
+        distanceLabel: "Distance:",
+        locating: "Finding your location...",
+        geoNotSupported: "Location access is not supported in this browser.",
+        geoDenied: "Location access denied. Please enable location permissions and try again.",
+        yourLocation: "Your Location",
         savedAppsHeading: "Saved Applications Database (SQL Store)",
         thAppId: "App ID",
         thUser: "User / Applicant",
@@ -339,8 +365,11 @@
         noAppsRow: 'No applications saved yet. Authenticate and click "Save Application".',
         authHeading: "Beneficiary Portal Authentication",
         fullNameLabel: "Full Name",
-        emailLabel: "Email Address",
-        passwordLabel: "Password",
+        emailLabel: "Gmail Address",
+        incomeLabel: "Annual Household Income (₹)",
+        incomeAutofillNote: "Saved to your profile so you won't need to re-enter it each time.",
+        passwordLabel: "Portal Password",
+        passwordSecurityNote: "⚠️ Create a password just for this portal — never enter your real Gmail password here.",
         authNote: "Simulates user registration & SQL password hashing via bcrypt backend.",
         authSubmitBtn: "Login / Register Account",
         incomeCapMsg: "🚫 Income Cap Exceeded: Annual household income must be within ₹5.00 Lakhs to qualify for NSFDC concessional credit.",
@@ -405,6 +434,13 @@
         locatorDesc: "स्थान और निधि उपलब्धता के आधार पर राज्य एजेंसियों, बैंकों और एमएफआई को फ़िल्टर करता है (उच्च एनपीए बकाया वाले संस्थानों को छोड़कर)।",
         activePartner: "सक्रिय चैनल भागीदार",
         restrictedPartner: "उच्च बकाया / प्रतिबंधित",
+        locateMeBtn: "मेरा स्थान उपयोग करें",
+        nearestHeading: "आपके निकटतम भागीदार",
+        distanceLabel: "दूरी:",
+        locating: "आपका स्थान खोजा जा रहा है...",
+        geoNotSupported: "इस ब्राउज़र में स्थान की सुविधा समर्थित नहीं है।",
+        geoDenied: "स्थान की पहुँच अस्वीकृत की गई। कृपया स्थान अनुमति सक्षम करें और पुनः प्रयास करें।",
+        yourLocation: "आपका स्थान",
         savedAppsHeading: "सहेजे गए आवेदन डेटाबेस (एसक्यूएल स्टोर)",
         thAppId: "आवेदन आईडी",
         thUser: "उपयोगकर्ता / आवेदक",
@@ -416,8 +452,11 @@
         noAppsRow: 'अभी तक कोई आवेदन सहेजा नहीं गया है। लॉगिन करें और "आवेदन सहेजें" पर क्लिक करें।',
         authHeading: "लाभार्थी पोर्टल प्रमाणीकरण",
         fullNameLabel: "पूरा नाम",
-        emailLabel: "ईमेल पता",
-        passwordLabel: "पासवर्ड",
+        emailLabel: "जीमेल पता",
+        incomeLabel: "वार्षिक पारिवारिक आय (₹)",
+        incomeAutofillNote: "आपकी प्रोफ़ाइल में सहेजा गया ताकि आपको इसे बार-बार दर्ज न करना पड़े।",
+        passwordLabel: "पोर्टल पासवर्ड",
+        passwordSecurityNote: "⚠️ केवल इस पोर्टल के लिए एक पासवर्ड बनाएं — यहां कभी भी अपना असली जीमेल पासवर्ड न डालें।",
         authNote: "bcrypt बैकएंड के माध्यम से उपयोगकर्ता पंजीकरण और एसक्यूएल पासवर्ड हैशिंग का अनुकरण करता है।",
         authSubmitBtn: "लॉगिन / खाता पंजीकृत करें",
         incomeCapMsg: "🚫 आय सीमा पार: एनएसएफडीसी रियायती ऋण के लिए पात्र होने हेतु वार्षिक पारिवारिक आय ₹5.00 लाख के भीतर होनी चाहिए।",
@@ -646,13 +685,21 @@
       e.preventDefault();
       const name = document.getElementById("authName").value;
       const email = document.getElementById("authEmail").value;
+      const income = parseFloat(document.getElementById("authIncome").value) || 0;
+      // Note: the portal password is captured for this demo's local login state only —
+      // it is never sent anywhere or treated as the user's actual Gmail password.
 
-      currentUser = { name, email };
+      currentUser = { name, email, income };
       document.getElementById("loggedInUserName").innerText = name;
       document.getElementById("userProfileBanner").classList.remove("hidden");
       document.getElementById("authBtn").innerText = t("accountActive");
-      
+
+      // Auto-fill the recommender so the user never has to re-enter their income
+      document.getElementById("familyIncome").value = income;
+      recommendScheme();
+
       toggleAuthModal();
+      document.getElementById("authForm").reset();
       announceVoiceMessage(t("welcomeVoiceMsg").replace("{name}", name));
     }
     function logout() {
@@ -700,12 +747,28 @@
         </tr>
       `).join('');
     }
+    let mapInstance = null;
+    let userMarker = null;
+    let partnerMarkers = []; // {marker, partner}
+
+    // Haversine distance in km between two lat/lng points
+    function distanceKm(lat1, lng1, lat2, lng2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
     function initMap() {
-      const map = L.map('map').setView([28.6139, 77.2090], 11);
+      mapInstance = L.map('map').setView([28.6139, 77.2090], 11);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map);
+      }).addTo(mapInstance);
+
       PARTNERS.forEach(partner => {
         const isEligible = partner.status.includes("Eligible");
         const color = isEligible ? "green" : "red";
@@ -714,16 +777,99 @@
           fillColor: color,
           fillOpacity: 0.8,
           radius: 8
-        }).addTo(map);
-        circle.bindPopup(`
-          <div class="text-xs">
-            <strong class="text-sm">${partner.name}</strong><br/>
-            Institutional Category: <b>${partner.type}</b><br/>
-            NPA Ratio: <b>${partner.npa}</b><br/>
-            Status: <span class="${isEligible ? 'text-green-700' : 'text-red-600'} font-bold">${partner.status}</span>
-          </div>
-        `);
+        }).addTo(mapInstance);
+        circle.bindPopup(buildPartnerPopup(partner));
+        partnerMarkers.push({ marker: circle, partner });
       });
+    }
+
+    function buildPartnerPopup(partner, distance) {
+      const isEligible = partner.status.includes("Eligible");
+      const distanceLine = (typeof distance === "number")
+        ? `${t("distanceLabel")} <b>${distance.toFixed(1)} km</b><br/>`
+        : "";
+      return `
+        <div class="text-xs">
+          <strong class="text-sm">${partner.name}</strong><br/>
+          ${distanceLine}
+          Institutional Category: <b>${partner.type}</b><br/>
+          NPA Ratio: <b>${partner.npa}</b><br/>
+          Status: <span class="${isEligible ? 'text-green-700' : 'text-red-600'} font-bold">${partner.status}</span>
+        </div>
+      `;
+    }
+
+    function locateUser() {
+      const statusEl = document.getElementById("locateStatus");
+      if (!navigator.geolocation) {
+        statusEl.innerText = t("geoNotSupported");
+        return;
+      }
+      statusEl.innerText = t("locating");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLng = position.coords.longitude;
+          statusEl.innerText = "";
+          renderUserLocation(userLat, userLng);
+        },
+        (err) => {
+          statusEl.innerText = t("geoDenied");
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    function renderUserLocation(userLat, userLng) {
+      if (userMarker) {
+        mapInstance.removeLayer(userMarker);
+      }
+      userMarker = L.marker([userLat, userLng], {
+        icon: L.divIcon({
+          className: '',
+          html: '<div style="background:#4338ca;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 2px #4338ca;"></div>',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        })
+      }).addTo(mapInstance);
+      userMarker.bindPopup(t("yourLocation")).openPopup();
+
+      // Compute distances and sort
+      const withDistance = PARTNERS.map(p => ({
+        partner: p,
+        distance: distanceKm(userLat, userLng, p.lat, p.lng)
+      })).sort((a, b) => a.distance - b.distance);
+
+      // Update popups with distance
+      partnerMarkers.forEach(pm => {
+        const match = withDistance.find(w => w.partner === pm.partner);
+        pm.marker.setPopupContent(buildPartnerPopup(pm.partner, match.distance));
+      });
+
+      // Fit map to show user + all partners
+      const bounds = L.latLngBounds([[userLat, userLng], ...PARTNERS.map(p => [p.lat, p.lng])]);
+      mapInstance.fitBounds(bounds, { padding: [30, 30] });
+
+      renderNearestPartnersList(withDistance);
+    }
+
+    function renderNearestPartnersList(withDistance) {
+      const listWrap = document.getElementById("nearestPartnersList");
+      const itemsEl = document.getElementById("nearestPartnersItems");
+      listWrap.classList.remove("hidden");
+
+      itemsEl.innerHTML = withDistance.map(({ partner, distance }) => {
+        const isEligible = partner.status.includes("Eligible");
+        return `
+          <div class="flex items-center justify-between text-xs p-2 rounded-lg border ${isEligible ? 'border-green-100 bg-green-50' : 'border-red-100 bg-red-50'}">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full ${isEligible ? 'bg-green-600' : 'bg-red-600'} inline-block"></span>
+              <span class="font-semibold text-slate-700">${partner.name}</span>
+            </div>
+            <span class="font-bold ${isEligible ? 'text-green-700' : 'text-red-600'}">${distance.toFixed(1)} km</span>
+          </div>
+        `;
+      }).join('');
     }
     window.onload = () => {
       recommendScheme();
