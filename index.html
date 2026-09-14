@@ -1,1230 +1,1297 @@
-{
-  "name": "ai-scheme-matching",
-  "version": "1.0.0",
-  "lockfileVersion": 3,
-  "requires": true,
-  "packages": {
-    "": {
-      "name": "ai-scheme-matching",
-      "version": "1.0.0",
-      "license": "ISC",
-      "dependencies": {
-        "axios": "^1.20.0",
-        "bcryptjs": "^2.4.3",
-        "cors": "^2.8.6",
-        "dotenv": "^17.4.2",
-        "express": "^5.2.1",
-        "jsonwebtoken": "^9.0.2"
-      },
-      "engines": {
-        "node": ">=22.13.0"
-      }
-    },
-    "node_modules/accepts": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/accepts/-/accepts-2.0.0.tgz",
-      "integrity": "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==",
-      "license": "MIT",
-      "dependencies": {
-        "mime-types": "^3.0.0",
-        "negotiator": "^1.0.0"
-      },
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/agent-base": {
-      "version": "6.0.2",
-      "resolved": "https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz",
-      "integrity": "sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==",
-      "license": "MIT",
-      "dependencies": {
-        "debug": "4"
-      },
-      "engines": {
-        "node": ">= 6.0.0"
-      }
-    },
-    "node_modules/asynckit": {
-      "version": "0.4.0",
-      "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz",
-      "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==",
-      "license": "MIT"
-    },
-    "node_modules/axios": {
-      "version": "1.20.0",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-1.20.0.tgz",
-      "integrity": "sha512-r8aOh8j9cGKpgQAqpzrUHnSIc6a59Y3Xf/cv8sy1DrHCkZHzQGEuoq1tARk6qSyDdtQGSDgpb9kFlruzPvrgwg==",
-      "license": "MIT",
-      "dependencies": {
-        "follow-redirects": "^1.16.0",
-        "form-data": "^4.0.6",
-        "https-proxy-agent": "^5.0.1",
-        "proxy-from-env": "^2.1.0"
-      }
-    },
-    "node_modules/bcryptjs": {
-      "version": "2.4.3",
-      "resolved": "https://registry.npmjs.org/bcryptjs/-/bcryptjs-2.4.3.tgz",
-      "integrity": "sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==",
-      "license": "MIT"
-    },
-    "node_modules/body-parser": {
-      "version": "2.3.0",
-      "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-2.3.0.tgz",
-      "integrity": "sha512-2cGmJupaNgg+QUwVLAucDuWuoMZ6EX9iHDRswZ5lsNYEmwPaRknMPCLZz07yTzVq/83p4o/wzbDZbBrTvGGTIw==",
-      "license": "MIT",
-      "dependencies": {
-        "bytes": "^3.1.2",
-        "content-type": "^2.0.0",
-        "debug": "^4.4.3",
-        "http-errors": "^2.0.1",
-        "iconv-lite": "^0.7.2",
-        "on-finished": "^2.4.1",
-        "qs": "^6.15.2",
-        "raw-body": "^3.0.2",
-        "type-is": "^2.1.0"
-      },
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/body-parser/node_modules/content-type": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
-      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/buffer-equal-constant-time": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz",
-      "integrity": "sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==",
-      "license": "BSD-3-Clause"
-    },
-    "node_modules/bytes": {
-      "version": "3.1.2",
-      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz",
-      "integrity": "sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/call-bind-apply-helpers": {
-      "version": "1.0.2",
-      "resolved": "https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz",
-      "integrity": "sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==",
-      "license": "MIT",
-      "dependencies": {
-        "es-errors": "^1.3.0",
-        "function-bind": "^1.1.2"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/call-bound": {
-      "version": "1.0.4",
-      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
-      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
-      "license": "MIT",
-      "dependencies": {
-        "call-bind-apply-helpers": "^1.0.2",
-        "get-intrinsic": "^1.3.0"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/combined-stream": {
-      "version": "1.0.8",
-      "resolved": "https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz",
-      "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
-      "license": "MIT",
-      "dependencies": {
-        "delayed-stream": "~1.0.0"
-      },
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/content-disposition": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-1.1.0.tgz",
-      "integrity": "sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/content-type": {
-      "version": "1.0.5",
-      "resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
-      "integrity": "sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/cookie": {
-      "version": "0.7.2",
-      "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz",
-      "integrity": "sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/cookie-signature": {
-      "version": "1.2.2",
-      "resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.2.2.tgz",
-      "integrity": "sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=6.6.0"
-      }
-    },
-    "node_modules/cors": {
-      "version": "2.8.6",
-      "resolved": "https://registry.npmjs.org/cors/-/cors-2.8.6.tgz",
-      "integrity": "sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==",
-      "license": "MIT",
-      "dependencies": {
-        "object-assign": "^4",
-        "vary": "^1"
-      },
-      "engines": {
-        "node": ">= 0.10"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/debug": {
-      "version": "4.4.3",
-      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
-      "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
-      "license": "MIT",
-      "dependencies": {
-        "ms": "^2.1.3"
-      },
-      "engines": {
-        "node": ">=6.0"
-      },
-      "peerDependenciesMeta": {
-        "supports-color": {
-          "optional": true
-        }
-      }
-    },
-    "node_modules/delayed-stream": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz",
-      "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=0.4.0"
-      }
-    },
-    "node_modules/depd": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz",
-      "integrity": "sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/dotenv": {
-      "version": "17.4.2",
-      "resolved": "https://registry.npmjs.org/dotenv/-/dotenv-17.4.2.tgz",
-      "integrity": "sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==",
-      "license": "BSD-2-Clause",
-      "engines": {
-        "node": ">=12"
-      },
-      "funding": {
-        "url": "https://dotenvx.com"
-      }
-    },
-    "node_modules/dunder-proto": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
-      "integrity": "sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==",
-      "license": "MIT",
-      "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
-        "es-errors": "^1.3.0",
-        "gopd": "^1.2.0"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/ecdsa-sig-formatter": {
-      "version": "1.0.11",
-      "resolved": "https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz",
-      "integrity": "sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==",
-      "license": "Apache-2.0",
-      "dependencies": {
-        "safe-buffer": "^5.0.1"
-      }
-    },
-    "node_modules/ee-first": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
-      "integrity": "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==",
-      "license": "MIT"
-    },
-    "node_modules/encodeurl": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz",
-      "integrity": "sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/es-define-property": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz",
-      "integrity": "sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/es-errors": {
-      "version": "1.3.0",
-      "resolved": "https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz",
-      "integrity": "sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/es-object-atoms": {
-      "version": "1.1.2",
-      "resolved": "https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.2.tgz",
-      "integrity": "sha512-HWcBoN6NileqtSydK2FqHbS/LoDd2pqrnQHLyJzBj4kOp/ky2MWMN694xOfkK8/SnUsW2DH7EfyVlydKCsm1Zw==",
-      "license": "MIT",
-      "dependencies": {
-        "es-errors": "^1.3.0"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/es-set-tostringtag": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/es-set-tostringtag/-/es-set-tostringtag-2.1.0.tgz",
-      "integrity": "sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==",
-      "license": "MIT",
-      "dependencies": {
-        "es-errors": "^1.3.0",
-        "get-intrinsic": "^1.2.6",
-        "has-tostringtag": "^1.0.2",
-        "hasown": "^2.0.2"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/escape-html": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
-      "integrity": "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==",
-      "license": "MIT"
-    },
-    "node_modules/etag": {
-      "version": "1.8.1",
-      "resolved": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
-      "integrity": "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/express": {
-      "version": "5.2.1",
-      "resolved": "https://registry.npmjs.org/express/-/express-5.2.1.tgz",
-      "integrity": "sha512-hIS4idWWai69NezIdRt2xFVofaF4j+6INOpJlVOLDO8zXGpUVEVzIYk12UUi2JzjEzWL3IOAxcTubgz9Po0yXw==",
-      "license": "MIT",
-      "dependencies": {
-        "accepts": "^2.0.0",
-        "body-parser": "^2.2.1",
-        "content-disposition": "^1.0.0",
-        "content-type": "^1.0.5",
-        "cookie": "^0.7.1",
-        "cookie-signature": "^1.2.1",
-        "debug": "^4.4.0",
-        "depd": "^2.0.0",
-        "encodeurl": "^2.0.0",
-        "escape-html": "^1.0.3",
-        "etag": "^1.8.1",
-        "finalhandler": "^2.1.0",
-        "fresh": "^2.0.0",
-        "http-errors": "^2.0.0",
-        "merge-descriptors": "^2.0.0",
-        "mime-types": "^3.0.0",
-        "on-finished": "^2.4.1",
-        "once": "^1.4.0",
-        "parseurl": "^1.3.3",
-        "proxy-addr": "^2.0.7",
-        "qs": "^6.14.0",
-        "range-parser": "^1.2.1",
-        "router": "^2.2.0",
-        "send": "^1.1.0",
-        "serve-static": "^2.2.0",
-        "statuses": "^2.0.1",
-        "type-is": "^2.0.1",
-        "vary": "^1.1.2"
-      },
-      "engines": {
-        "node": ">= 18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/finalhandler": {
-      "version": "2.1.1",
-      "resolved": "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.1.tgz",
-      "integrity": "sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==",
-      "license": "MIT",
-      "dependencies": {
-        "debug": "^4.4.0",
-        "encodeurl": "^2.0.0",
-        "escape-html": "^1.0.3",
-        "on-finished": "^2.4.1",
-        "parseurl": "^1.3.3",
-        "statuses": "^2.0.1"
-      },
-      "engines": {
-        "node": ">= 18.0.0"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/follow-redirects": {
-      "version": "1.16.0",
-      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.0.tgz",
-      "integrity": "sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==",
-      "funding": [
-        {
-          "type": "individual",
-          "url": "https://github.com/sponsors/RubenVerborgh"
-        }
-      ],
-      "license": "MIT",
-      "engines": {
-        "node": ">=4.0"
-      },
-      "peerDependenciesMeta": {
-        "debug": {
-          "optional": true
-        }
-      }
-    },
-    "node_modules/form-data": {
-      "version": "4.0.6",
-      "resolved": "https://registry.npmjs.org/form-data/-/form-data-4.0.6.tgz",
-      "integrity": "sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==",
-      "license": "MIT",
-      "dependencies": {
-        "asynckit": "^0.4.0",
-        "combined-stream": "^1.0.8",
-        "es-set-tostringtag": "^2.1.0",
-        "hasown": "^2.0.4",
-        "mime-types": "^2.1.35"
-      },
-      "engines": {
-        "node": ">= 6"
-      }
-    },
-    "node_modules/form-data/node_modules/mime-db": {
-      "version": "1.52.0",
-      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz",
-      "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/form-data/node_modules/mime-types": {
-      "version": "2.1.35",
-      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz",
-      "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
-      "license": "MIT",
-      "dependencies": {
-        "mime-db": "1.52.0"
-      },
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/forwarded": {
-      "version": "0.2.0",
-      "resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",
-      "integrity": "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/fresh": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/fresh/-/fresh-2.0.0.tgz",
-      "integrity": "sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/function-bind": {
-      "version": "1.1.2",
-      "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz",
-      "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==",
-      "license": "MIT",
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/get-intrinsic": {
-      "version": "1.3.0",
-      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
-      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
-      "license": "MIT",
-      "dependencies": {
-        "call-bind-apply-helpers": "^1.0.2",
-        "es-define-property": "^1.0.1",
-        "es-errors": "^1.3.0",
-        "es-object-atoms": "^1.1.1",
-        "function-bind": "^1.1.2",
-        "get-proto": "^1.0.1",
-        "gopd": "^1.2.0",
-        "has-symbols": "^1.1.0",
-        "hasown": "^2.0.2",
-        "math-intrinsics": "^1.1.0"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/get-proto": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz",
-      "integrity": "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==",
-      "license": "MIT",
-      "dependencies": {
-        "dunder-proto": "^1.0.1",
-        "es-object-atoms": "^1.0.0"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/gopd": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz",
-      "integrity": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/has-symbols": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz",
-      "integrity": "sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/has-tostringtag": {
-      "version": "1.0.2",
-      "resolved": "https://registry.npmjs.org/has-tostringtag/-/has-tostringtag-1.0.2.tgz",
-      "integrity": "sha512-NqADB8VjPFLM2V0VvHUewwwsw0ZWBaIdgo+ieHtK3hasLz4qeCRjYcqfB6AQrBggRKppKF8L52/VqdVsO47Dlw==",
-      "license": "MIT",
-      "dependencies": {
-        "has-symbols": "^1.0.3"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/hasown": {
-      "version": "2.0.4",
-      "resolved": "https://registry.npmjs.org/hasown/-/hasown-2.0.4.tgz",
-      "integrity": "sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==",
-      "license": "MIT",
-      "dependencies": {
-        "function-bind": "^1.1.2"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/http-errors": {
-      "version": "2.0.1",
-      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz",
-      "integrity": "sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==",
-      "license": "MIT",
-      "dependencies": {
-        "depd": "~2.0.0",
-        "inherits": "~2.0.4",
-        "setprototypeof": "~1.2.0",
-        "statuses": "~2.0.2",
-        "toidentifier": "~1.0.1"
-      },
-      "engines": {
-        "node": ">= 0.8"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/https-proxy-agent": {
-      "version": "5.0.1",
-      "resolved": "https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz",
-      "integrity": "sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==",
-      "license": "MIT",
-      "dependencies": {
-        "agent-base": "6",
-        "debug": "4"
-      },
-      "engines": {
-        "node": ">= 6"
-      }
-    },
-    "node_modules/iconv-lite": {
-      "version": "0.7.3",
-      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz",
-      "integrity": "sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==",
-      "license": "MIT",
-      "dependencies": {
-        "safer-buffer": ">= 2.1.2 < 3.0.0"
-      },
-      "engines": {
-        "node": ">=0.10.0"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/inherits": {
-      "version": "2.0.4",
-      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
-      "integrity": "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==",
-      "license": "ISC"
-    },
-    "node_modules/ipaddr.js": {
-      "version": "1.9.1",
-      "resolved": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz",
-      "integrity": "sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.10"
-      }
-    },
-    "node_modules/is-promise": {
-      "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/is-promise/-/is-promise-4.0.0.tgz",
-      "integrity": "sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==",
-      "license": "MIT"
-    },
-    "node_modules/jsonwebtoken": {
-      "version": "9.0.3",
-      "resolved": "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.3.tgz",
-      "integrity": "sha512-MT/xP0CrubFRNLNKvxJ2BYfy53Zkm++5bX9dtuPbqAeQpTVe0MQTFhao8+Cp//EmJp244xt6Drw/GVEGCUj40g==",
-      "license": "MIT",
-      "dependencies": {
-        "jws": "^4.0.1",
-        "lodash.includes": "^4.3.0",
-        "lodash.isboolean": "^3.0.3",
-        "lodash.isinteger": "^4.0.4",
-        "lodash.isnumber": "^3.0.3",
-        "lodash.isplainobject": "^4.0.6",
-        "lodash.isstring": "^4.0.1",
-        "lodash.once": "^4.0.0",
-        "ms": "^2.1.1",
-        "semver": "^7.5.4"
-      },
-      "engines": {
-        "node": ">=12",
-        "npm": ">=6"
-      }
-    },
-    "node_modules/jwa": {
-      "version": "2.0.1",
-      "resolved": "https://registry.npmjs.org/jwa/-/jwa-2.0.1.tgz",
-      "integrity": "sha512-hRF04fqJIP8Abbkq5NKGN0Bbr3JxlQ+qhZufXVr0DvujKy93ZCbXZMHDL4EOtodSbCWxOqR8MS1tXA5hwqCXDg==",
-      "license": "MIT",
-      "dependencies": {
-        "buffer-equal-constant-time": "^1.0.1",
-        "ecdsa-sig-formatter": "1.0.11",
-        "safe-buffer": "^5.0.1"
-      }
-    },
-    "node_modules/jws": {
-      "version": "4.0.1",
-      "resolved": "https://registry.npmjs.org/jws/-/jws-4.0.1.tgz",
-      "integrity": "sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==",
-      "license": "MIT",
-      "dependencies": {
-        "jwa": "^2.0.1",
-        "safe-buffer": "^5.0.1"
-      }
-    },
-    "node_modules/lodash.includes": {
-      "version": "4.3.0",
-      "resolved": "https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz",
-      "integrity": "sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.isboolean": {
-      "version": "3.0.3",
-      "resolved": "https://registry.npmjs.org/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz",
-      "integrity": "sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.isinteger": {
-      "version": "4.0.4",
-      "resolved": "https://registry.npmjs.org/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz",
-      "integrity": "sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.isnumber": {
-      "version": "3.0.3",
-      "resolved": "https://registry.npmjs.org/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz",
-      "integrity": "sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.isplainobject": {
-      "version": "4.0.6",
-      "resolved": "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz",
-      "integrity": "sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.isstring": {
-      "version": "4.0.1",
-      "resolved": "https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz",
-      "integrity": "sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==",
-      "license": "MIT"
-    },
-    "node_modules/lodash.once": {
-      "version": "4.1.1",
-      "resolved": "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz",
-      "integrity": "sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==",
-      "license": "MIT"
-    },
-    "node_modules/math-intrinsics": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz",
-      "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      }
-    },
-    "node_modules/media-typer": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-1.1.1.tgz",
-      "integrity": "sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/merge-descriptors": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-2.0.0.tgz",
-      "integrity": "sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/sindresorhus"
-      }
-    },
-    "node_modules/mime-db": {
-      "version": "1.54.0",
-      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz",
-      "integrity": "sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      }
-    },
-    "node_modules/mime-types": {
-      "version": "3.0.2",
-      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-3.0.2.tgz",
-      "integrity": "sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==",
-      "license": "MIT",
-      "dependencies": {
-        "mime-db": "^1.54.0"
-      },
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/ms": {
-      "version": "2.1.3",
-      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
-      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
-      "license": "MIT"
-    },
-    "node_modules/negotiator": {
-      "version": "1.1.0",
-      "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-1.1.0.tgz",
-      "integrity": "sha512-NMPBRMJgiQHjbd8phG3Vebdx4kZ1H121rbl5IkMqeOsahptB9BKo/d7oJ3zTXqTgagn2bWlNSXkh0QUGM31RYg==",
-      "license": "MIT",
-      "dependencies": {
-        "content-type": "^2.1.0"
-      },
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/negotiator/node_modules/content-type": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
-      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/object-assign": {
-      "version": "4.1.1",
-      "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
-      "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=0.10.0"
-      }
-    },
-    "node_modules/object-inspect": {
-      "version": "1.13.4",
-      "resolved": "https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz",
-      "integrity": "sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/on-finished": {
-      "version": "2.4.1",
-      "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz",
-      "integrity": "sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==",
-      "license": "MIT",
-      "dependencies": {
-        "ee-first": "1.1.1"
-      },
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/once": {
-      "version": "1.4.0",
-      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
-      "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
-      "license": "ISC",
-      "dependencies": {
-        "wrappy": "1"
-      }
-    },
-    "node_modules/parseurl": {
-      "version": "1.3.3",
-      "resolved": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz",
-      "integrity": "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/path-to-regexp": {
-      "version": "8.4.2",
-      "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-8.4.2.tgz",
-      "integrity": "sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==",
-      "license": "MIT",
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/proxy-addr": {
-      "version": "2.0.7",
-      "resolved": "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.7.tgz",
-      "integrity": "sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==",
-      "license": "MIT",
-      "dependencies": {
-        "forwarded": "0.2.0",
-        "ipaddr.js": "1.9.1"
-      },
-      "engines": {
-        "node": ">= 0.10"
-      }
-    },
-    "node_modules/proxy-from-env": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-2.1.0.tgz",
-      "integrity": "sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=10"
-      }
-    },
-    "node_modules/qs": {
-      "version": "6.16.0",
-      "resolved": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
-      "integrity": "sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==",
-      "license": "BSD-3-Clause",
-      "dependencies": {
-        "es-define-property": "^1.0.1",
-        "side-channel": "^1.1.1"
-      },
-      "engines": {
-        "node": ">=0.6"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/range-parser": {
-      "version": "1.3.0",
-      "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.3.0.tgz",
-      "integrity": "sha512-hek2mFQpPuI4E1BBKrSto+BU3e3x4xuarsbiwr3+lf7p44juvFMV0XFWQAP3xUyqXA4RrXLIoaSUGbSt056ZMw==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.6"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/raw-body": {
-      "version": "3.0.2",
-      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz",
-      "integrity": "sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==",
-      "license": "MIT",
-      "dependencies": {
-        "bytes": "~3.1.2",
-        "http-errors": "~2.0.1",
-        "iconv-lite": "~0.7.0",
-        "unpipe": "~1.0.0"
-      },
-      "engines": {
-        "node": ">= 0.10"
-      }
-    },
-    "node_modules/router": {
-      "version": "2.2.0",
-      "resolved": "https://registry.npmjs.org/router/-/router-2.2.0.tgz",
-      "integrity": "sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==",
-      "license": "MIT",
-      "dependencies": {
-        "debug": "^4.4.0",
-        "depd": "^2.0.0",
-        "is-promise": "^4.0.0",
-        "parseurl": "^1.3.3",
-        "path-to-regexp": "^8.0.0"
-      },
-      "engines": {
-        "node": ">= 18"
-      }
-    },
-    "node_modules/safe-buffer": {
-      "version": "5.2.1",
-      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
-      "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==",
-      "funding": [
-        {
-          "type": "github",
-          "url": "https://github.com/sponsors/feross"
-        },
-        {
-          "type": "patreon",
-          "url": "https://www.patreon.com/feross"
-        },
-        {
-          "type": "consulting",
-          "url": "https://feross.org/support"
-        }
-      ],
-      "license": "MIT"
-    },
-    "node_modules/safer-buffer": {
-      "version": "2.1.2",
-      "resolved": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
-      "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==",
-      "license": "MIT"
-    },
-    "node_modules/semver": {
-      "version": "7.8.5",
-      "resolved": "https://registry.npmjs.org/semver/-/semver-7.8.5.tgz",
-      "integrity": "sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==",
-      "license": "ISC",
-      "bin": {
-        "semver": "bin/semver.js"
-      },
-      "engines": {
-        "node": ">=10"
-      }
-    },
-    "node_modules/send": {
-      "version": "1.2.1",
-      "resolved": "https://registry.npmjs.org/send/-/send-1.2.1.tgz",
-      "integrity": "sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==",
-      "license": "MIT",
-      "dependencies": {
-        "debug": "^4.4.3",
-        "encodeurl": "^2.0.0",
-        "escape-html": "^1.0.3",
-        "etag": "^1.8.1",
-        "fresh": "^2.0.0",
-        "http-errors": "^2.0.1",
-        "mime-types": "^3.0.2",
-        "ms": "^2.1.3",
-        "on-finished": "^2.4.1",
-        "range-parser": "^1.2.1",
-        "statuses": "^2.0.2"
-      },
-      "engines": {
-        "node": ">= 18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/serve-static": {
-      "version": "2.2.1",
-      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-2.2.1.tgz",
-      "integrity": "sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw==",
-      "license": "MIT",
-      "dependencies": {
-        "encodeurl": "^2.0.0",
-        "escape-html": "^1.0.3",
-        "parseurl": "^1.3.3",
-        "send": "^1.2.0"
-      },
-      "engines": {
-        "node": ">= 18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/setprototypeof": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz",
-      "integrity": "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==",
-      "license": "ISC"
-    },
-    "node_modules/side-channel": {
-      "version": "1.1.1",
-      "resolved": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz",
-      "integrity": "sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==",
-      "license": "MIT",
-      "dependencies": {
-        "es-errors": "^1.3.0",
-        "object-inspect": "^1.13.4",
-        "side-channel-list": "^1.0.1",
-        "side-channel-map": "^1.0.1",
-        "side-channel-weakmap": "^1.0.2"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/side-channel-list": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz",
-      "integrity": "sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==",
-      "license": "MIT",
-      "dependencies": {
-        "es-errors": "^1.3.0",
-        "object-inspect": "^1.13.4"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/side-channel-map": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz",
-      "integrity": "sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==",
-      "license": "MIT",
-      "dependencies": {
-        "call-bound": "^1.0.2",
-        "es-errors": "^1.3.0",
-        "get-intrinsic": "^1.2.5",
-        "object-inspect": "^1.13.3"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/side-channel-weakmap": {
-      "version": "1.0.2",
-      "resolved": "https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz",
-      "integrity": "sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==",
-      "license": "MIT",
-      "dependencies": {
-        "call-bound": "^1.0.2",
-        "es-errors": "^1.3.0",
-        "get-intrinsic": "^1.2.5",
-        "object-inspect": "^1.13.3",
-        "side-channel-map": "^1.0.1"
-      },
-      "engines": {
-        "node": ">= 0.4"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/statuses": {
-      "version": "2.0.2",
-      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz",
-      "integrity": "sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/toidentifier": {
-      "version": "1.0.1",
-      "resolved": "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz",
-      "integrity": "sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=0.6"
-      }
-    },
-    "node_modules/type-is": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/type-is/-/type-is-2.1.0.tgz",
-      "integrity": "sha512-faYHw0anBbc/kWF3zFTEnxSFOAGUX9GFbOBthvDdLsIlEoWOFOtS0zgCiQYwIskL9iGXZL3kAXD8OoZ4GmMATA==",
-      "license": "MIT",
-      "dependencies": {
-        "content-type": "^2.0.0",
-        "media-typer": "^1.1.0",
-        "mime-types": "^3.0.0"
-      },
-      "engines": {
-        "node": ">= 18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/type-is/node_modules/content-type": {
-      "version": "2.1.0",
-      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
-      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=18"
-      },
-      "funding": {
-        "type": "opencollective",
-        "url": "https://opencollective.com/express"
-      }
-    },
-    "node_modules/unpipe": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz",
-      "integrity": "sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/vary": {
-      "version": "1.1.2",
-      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
-      "integrity": "sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 0.8"
-      }
-    },
-    "node_modules/wrappy": {
-      "version": "1.0.2",
-      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
-      "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==",
-      "license": "ISC"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheme Saathi - AI & Voice Powered</title>
+  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CDN Warning Suppression -->
+<script>
+  window.tailwind = { config: { suppressWarning: true } };
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS & JS for Mapping -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* Leaflet fix: give the map its own stacking context so its internal
+       panes/popups (Leaflet uses z-index up to ~700) can never render on
+       top of the app's modals (z-50). */
+    #map { height: 350px; width: 100%; border-radius: 0.5rem; position: relative; z-index: 0; }
+    .recording-pulse {
+      animation: pulse 1.5s infinite;
     }
-  }
-}
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans pb-12">
+
+  <!-- Navigation / Header -->
+  <header class="bg-indigo-900 text-white py-4 shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <div>
+        <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+          <span>🏛️</span> <span data-i18n="portalTitle">Scheme Saathi</span>
+        </h1>
+        <p class="text-indigo-200 text-xs md:text-sm" data-i18n="portalSubtitle">Concessional Credit Platform with AI & Voice Assistance</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="demoBtn" onclick="loginAsDemo()" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded text-xs md:text-sm font-semibold transition border border-emerald-400" data-i18n="demoBtn">
+          View Demo Account
+        </button>
+        <button id="authBtn" onclick="toggleAuthModal()" class="bg-indigo-700 hover:bg-indigo-600 px-3 py-1.5 rounded text-xs md:text-sm font-semibold transition border border-indigo-500" data-i18n="loginBtn">
+          Login / Register
+        </button>
+        <select id="langSelect" onchange="applyLanguage()" class="bg-indigo-800 text-white border border-indigo-600 rounded px-2 py-1 text-xs md:text-sm">
+          <option value="en-IN">English</option>
+          <option value="hi-IN">हिन्दी (Hindi)</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- User Banner (Logged In State) -->
+  <div id="userProfileBanner" class="hidden bg-indigo-100 border-b border-indigo-200 py-2">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center text-xs md:text-sm text-indigo-900">
+      <span><span data-i18n="welcomeBack">Welcome back,</span> <strong id="loggedInUserName">Beneficiary</strong> | <span data-i18n="sqlSyncStatus">SQL Sync Status:</span> <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded font-bold" data-i18n="sqlConnected">Connected (SQLite)</span></span>
+      <button onclick="logout()" class="text-red-600 hover:underline font-semibold" data-i18n="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 mt-6 space-y-8">
+
+    <!-- Voice Control Bar -->
+    <section class="bg-gradient-to-r from-indigo-800 to-indigo-900 text-white rounded-xl p-5 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="space-y-1">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+          <span>🎙️</span> <span data-i18n="voiceHeading">Hands-Free Voice Assistant</span>
+        </h2>
+        <p class="text-xs text-indigo-200" data-i18n="voiceDesc">
+          Click the mic and describe your project naturally (e.g., "I need a loan of 1 lakh 20 thousand for a small retail shop").
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="micBtn" onclick="toggleVoiceInput()" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2.5 rounded-full flex items-center gap-2 shadow transition">
+          <span id="micIcon">🎤</span> <span id="micStatusText" data-i18n="speakBtn">Speak Profile</span>
+        </button>
+        <button id="readAloudBtn" onclick="speakCurrentRecommendation()" class="bg-indigo-700 hover:bg-indigo-600 text-white font-semibold px-3 py-2.5 rounded-full flex items-center gap-2 shadow transition border border-indigo-500 text-xs">
+          <span>🔊</span> <span data-i18n="readAloudBtn">Read Recommendations</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 1. Smart Scheme Recommender Form -->
+    <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-indigo-900" data-i18n="recommenderHeading">1. Smart Scheme Eligibility Recommender</h2>
+        <span id="apiStatusBadge" class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-mono" data-i18n="backendActive">Backend Engine: Active</span>
+      </div>
+
+      <form id="recommenderForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1" data-i18n="targetCategory">Target Category</label>
+          <select id="projectCategory" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+            <option value="micro" data-i18n="optMicro">Micro Finance Scheme (MFS)</option>
+            <option value="term" data-i18n="optTerm">Term Loan Scheme (Large Project)</option>
+            <option value="education" data-i18n="optEducation">Educational Loan Scheme (ELS)</option>
+            <option value="aajeevika" data-i18n="optAajeevika">Aajeevika Micro-Finance (NBFC-MFI)</option>
+            <option value="uny" data-i18n="optUny">Udyam Nidhi Yojana (UNY)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1" data-i18n="projectCostLabel">Estimated Project Cost (₹)</label>
+          <input type="number" id="projectCost" value="120000" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1" data-i18n="familyIncomeLabel">Annual Household Income (₹)</label>
+          <input type="number" id="familyIncome" value="250000" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1" data-i18n="genderLabel">Gender Concession</label>
+          <select id="gender" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-indigo-500">
+            <option value="male" data-i18n="optMale">Male</option>
+            <option value="female" data-i18n="optFemale">Female (0.5% Interest Rebate)</option>
+          </select>
+        </div>
+        <div class="md:col-span-2 lg:col-span-4 mt-2 flex gap-3">
+          <button type="button" onclick="recommendScheme()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition shadow" data-i18n="evaluateBtn">
+            Evaluate Eligibility & Schemes
+          </button>
+          <button type="button" onclick="saveApplicationToSQL()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2.5 rounded-lg transition shadow flex items-center gap-1 text-sm" data-i18n="saveBtn">
+            💾 Save Application
+          </button>
+        </div>
+      </form>
+
+      <!-- Scheme Result Card -->
+      <div id="schemeResult" class="mt-6 bg-indigo-50 rounded-lg p-5 border border-indigo-100 space-y-2">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- 2 & 3 Split Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- 2. Financial EMI & Moratorium Calculator -->
+      <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+        <h2 class="text-xl font-bold text-indigo-900 mb-4" data-i18n="emiHeading">2. Scheme Quarterly EMI & Moratorium Calculator</h2>
+        
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div>
+              <span class="block text-xs text-slate-500" data-i18n="eligiblePrincipal">Eligible Loan Principal</span>
+              <strong id="principalVal" class="text-indigo-900 text-base">₹0</strong>
+              <span class="block text-[10px] text-slate-400" data-i18n="principalNote">(90% of Project Cost)</span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500" data-i18n="appliedRate">Applied Concessional Interest</span>
+              <strong id="rateVal" class="text-indigo-900 text-base">0% p.a.</strong>
+              <span class="block text-[10px] text-slate-400" data-i18n="rateNote">(NSFDC Subsidized Rate)</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm font-medium text-slate-700 mb-1">
+              <span data-i18n="tenureLabel">Repayment Tenure (Years)</span>
+              <span id="tenureVal" class="font-bold text-indigo-700">3 <span data-i18n="yearsWord">Years</span></span>
+            </div>
+            <input type="range" id="tenure" min="1" max="12" value="3" class="w-full accent-indigo-600" oninput="calculateEMI()">
+            <div class="flex justify-between text-xs text-slate-400"><span data-i18n="oneYear">1 Year</span><span data-i18n="twelveYears">12 Years</span></div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1" data-i18n="moratoriumLabel">Moratorium Period (Grace Months)</label>
+            <select id="moratorium" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm" onchange="calculateEMI()">
+              <option value="3" data-i18n="moratorium3">3 Months (Micro Finance Standard)</option>
+              <option value="6" data-i18n="moratorium6">6 Months (Term Loan Standard)</option>
+              <option value="12" data-i18n="moratorium12">12 Months (Construction/Education)</option>
+            </select>
+          </div>
+
+          <!-- EMI Amortization Summary -->
+          <div class="bg-indigo-950 text-white rounded-lg p-4 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-indigo-200" data-i18n="quarterlyEmiLabel">Quarterly EMI Installment:</span>
+              <strong id="quarterlyEmi" class="text-xl text-green-400">₹0</strong>
+            </div>
+            <hr class="border-indigo-800">
+            <div class="flex justify-between text-xs text-indigo-300">
+              <span data-i18n="totalInterestLabel">Total Accrued Interest:</span>
+              <strong id="totalInterest" class="text-white">₹0</strong>
+            </div>
+            <div class="flex justify-between text-xs text-indigo-300">
+              <span data-i18n="totalPaymentLabel">Total Payable Amount:</span>
+              <strong id="totalPayment" class="text-white">₹0</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Geo-Spatial Partner Locator -->
+      <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-2">
+            <h2 class="text-xl font-bold text-indigo-900" data-i18n="locatorHeading">3. Nearby Eligible Channel Partners</h2>
+            <span class="text-xs bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded" data-i18n="npaFilter">Verified Partner Directory</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-3" data-i18n="locatorDesc">
+            Shows verified state agencies, banks, and MFIs near you. Partner tier shown is our own curated designation, not a published credit/NPA disclosure.
+          </p>
+
+          <div class="flex items-center gap-2 mb-3">
+            <button id="locateMeBtn" onclick="locateUser()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 py-2 rounded-lg shadow flex items-center gap-1.5 transition">
+              <span>📍</span> <span data-i18n="locateMeBtn">Use My Location</span>
+            </button>
+            <button onclick="fetchRealtimeGovData()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-lg transition border flex items-center gap-1">
+              <span>🔄</span> <span>Sync Central Data</span>
+            </button>
+            <span id="locateStatus" class="text-xs text-slate-500"></span>
+          </div>
+
+          <!-- Map Element -->
+          <div id="map"></div>
+
+          <!-- Nearest Partners List -->
+          <div id="nearestPartnersList" class="hidden mt-4 space-y-2">
+            <h3 class="text-xs font-bold text-slate-600 uppercase" data-i18n="nearestHeading">Nearest Partners to You</h3>
+            <div id="nearestPartnersItems" class="space-y-1.5"></div>
+          </div>
+        </div>
+
+        <div class="mt-4 flex justify-between items-center text-xs text-slate-500 border-t pt-3">
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-green-600 inline-block"></span> <span data-i18n="activePartner">Active Channel Partner</span></span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600 inline-block"></span> <span data-i18n="restrictedPartner">High Overdue / Restricted</span></span>
+        </div>
+      </section>
+      
+    </div>
+
+    <!-- Saved Applications Section (Simulated SQL Records) -->
+    <section class="bg-white rounded-xl shadow-md p-6 border border-slate-200">
+      <h2 class="text-lg font-bold text-indigo-900 mb-3 flex items-center gap-2">
+        <span>🗄️</span> <span data-i18n="savedAppsHeading">Saved Applications Database (SQL Store)</span>
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b">
+              <th class="p-2.5" data-i18n="thAppId">App ID</th>
+              <th class="p-2.5" data-i18n="thUser">User / Applicant</th>
+              <th class="p-2.5" data-i18n="thScheme">Recommended Scheme</th>
+              <th class="p-2.5" data-i18n="thCost">Project Cost</th>
+              <th class="p-2.5" data-i18n="thLoan">Loan Sanction (90%)</th>
+              <th class="p-2.5" data-i18n="thEmi">Quarterly EMI</th>
+              <th class="p-2.5" data-i18n="thStatus">Status</th>
+            </tr>
+          </thead>
+          <tbody id="sqlApplicationsTable">
+            <tr>
+              <td colspan="7" class="p-4 text-center text-slate-400" data-i18n="noAppsRow">No applications saved yet. Authenticate and click "Save Application".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Login / Register Modal -->
+  <div id="authModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 space-y-4 border border-slate-200">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-lg font-bold text-indigo-900" data-i18n="authHeading">Beneficiary Portal Authentication</h3>
+        <button onclick="toggleAuthModal()" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+      </div>
+      
+      <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="fullNameLabel">Full Name</label>
+          <input type="text" id="authName" required placeholder="Ramesh Kumar" class="w-full border rounded-lg p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="emailLabel">Gmail Address</label>
+          <input type="email" id="authEmail" required placeholder="ramesh@gmail.com" pattern=".+@gmail\.com" title="Please enter a valid Gmail address" class="w-full border rounded-lg p-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="incomeLabel">Annual Household Income (₹)</label>
+          <input type="number" id="authIncome" required min="0" placeholder="250000" class="w-full border rounded-lg p-2 text-sm">
+          <p class="text-[10px] text-slate-400 mt-1" data-i18n="incomeAutofillNote">Saved to your profile so you won't need to re-enter it each time.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1" data-i18n="passwordLabel">Portal Password</label>
+          <input type="password" id="authPassword" required placeholder="••••••••" class="w-full border rounded-lg p-2 text-sm">
+          <p class="text-[10px] text-amber-600 mt-1" data-i18n="passwordSecurityNote">⚠️ Create a password just for this portal — never enter your real Gmail password here.</p>
+        </div>
+        <p class="text-[11px] text-slate-400" data-i18n="authNote">Registers or logs you in against a real SQLite-backed API, with bcrypt-hashed passwords ⁠— no plaintext passwords are stored.</p>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition text-sm" data-i18n="authSubmitBtn">
+          Login / Register Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Master Schemes Dataset
+    // All 5 figures verified against nsfdc.nic.in/scheme (checked 2026-09-14).
+    const SCHEMES = {
+      micro: { name: "Micro Finance Scheme (MFS)", nameHi: "सूक्ष्म वित्त योजना (एमएफएस)", maxCost: 140000, loanPct: 0.90, baseRate: 6.5, maxTenure: 3, defaultMoratorium: 3 },
+      term: { name: "Term Loan Scheme", nameHi: "टर्म ऋण योजना", maxCost: 5000000, loanPct: 0.90, baseRate: 8.0, maxTenure: 7, defaultMoratorium: 6 },
+      education: { name: "Educational Loan Scheme (ELS)", nameHi: "शैक्षिक ऋण योजना (ईएलएस)", maxCost: 4000000, loanPct: 0.90, baseRate: 6.5, maxTenure: 12, defaultMoratorium: 12 },
+      aajeevika: { name: "Aajeevika Micro-Finance (NBFC-MFI)", nameHi: "आजीविका सूक्ष्म वित्त (एनबीएफसी-एमएफआई)", maxCost: 140000, loanPct: 0.90, baseRate: 15.0, maxTenure: 3, defaultMoratorium: 3 },
+      // Udyam Nidhi Yojana (UNY) — via Cooperative Banks/Societies (13% to beneficiary)
+      // or Small Finance Banks (15%). We model the Cooperative Bank rate (13%) as the
+      // base rate here since it's the lower/first-listed channel on NSFDC's site;
+      // flag in Q&A that SFB channel applicants would see 15% instead.
+      uny: { name: "Udyam Nidhi Yojana (UNY)", nameHi: "उद्यम निधि योजना (यूएनवाई)", maxCost: 500000, loanPct: 0.90, baseRate: 13.0, maxTenure: 5, defaultMoratorium: 3 }
+    };
+
+    // Geo-Spatial Partner Dataset (Dynamically updated from data.gov.in)
+    // Real, verified partner institutions (name, address, and coordinates
+    // confirmed against Google Places on 2026-09-13). "status"/"partnerTier"
+    // is OUR OWN internal partnership designation for this demo — not a
+    // published NPA/credit-risk disclosure, since that data isn't public
+    // for any institution.
+    //
+    // NOTE on data provenance (checked 2026-09-14): we looked into sourcing
+    // this list from the PM SURAJ portal (pmsuraj.dosje.gov.in/login), since
+    // that's where real NSFDC applications are actually submitted — but it's
+    // a beneficiary authentication/application portal behind a login wall,
+    // not a public directory of branch/partner locations, so there's nothing
+    // there to scrape or call as an API. The NSFDC HQ entry below is already
+    // confirmed against NSFDC's own published address (nsfdc.nic.in/en/about-nsfdc).
+    // If the team wants to expand this list with more real, geocoded partner
+    // branches later, the legitimate public source is NSFDC's own channel
+    // partner directory (nsfdc.nic.in/en/channel-partners-scas — lists State
+    // Channelising Agencies per state/UT), which would need each address
+    // geocoded to lat/lng by hand since it doesn't publish coordinates either.
+    let PARTNERS = [
+      { name: "National Scheduled Castes Finance & Development Corporation (NSFDC)", lat: 28.6394, lng: 77.2857, status: "Eligible", npa: "Preferred Partner", type: "SCA", address: "14th Floor, Scope Minar, Laxmi Nagar District Centre, New Delhi 110092" },
+      { name: "Punjab National Bank – Okhla Industrial Estate Branch", lat: 28.5534, lng: 77.2655, status: "Eligible", npa: "Preferred Partner", type: "PSB", address: "NSIC, Okhla Phase III, New Delhi 110020" },
+      { name: "State Bank of India – Local Head Office, Connaught Place", lat: 28.6269, lng: 77.2130, status: "Eligible", npa: "Preferred Partner", type: "PSB", address: "1 Jai Singh Marg, Connaught Place, New Delhi 110001" },
+      { name: "SATYA MicroCapital Limited", lat: 28.5190, lng: 77.2835, status: "Eligible", npa: "Preferred Partner", type: "NBFC-MFI", address: "DLF Prime Tower, Okhla Phase I, New Delhi 110020" },
+      { name: "Fusion Finance – Head Office", lat: 28.6262, lng: 77.1429, status: "Eligible", npa: "Preferred Partner", type: "NBFC-MFI", address: "Naraina Vihar, New Delhi 110028" },
+      // Added for Udyam Nidhi Yojana (UNY) — NSFDC channels UNY through Small Finance
+      // Banks and Cooperative Banks/Societies specifically, so these two entries give
+      // the map real, verified branches for that scheme's channel types. Name/address/
+      // coordinates confirmed via Google Places on 2026-09-14.
+      { name: "Ujjivan Small Finance Bank – Green Park Branch", lat: 28.5577699, lng: 77.2058557, status: "Eligible", npa: "Preferred Partner", type: "SFB", address: "Ground Floor, Plot No 21, Green Park Ext Rd, Yusuf Sarai, New Delhi 110016" },
+      { name: "Delhi State Cooperative Bank Limited", lat: 28.6431623, lng: 77.2406627, status: "Eligible", npa: "Preferred Partner", type: "Cooperative Bank", address: "Shop No. 31, Netaji Subhash Marg, Daryaganj, New Delhi 110002" },
+      // Illustrative-only entry so the map still demonstrates the restricted-status
+      // styling — deliberately NOT a real institution's name, so we're never making
+      // an unverified claim against an actual business.
+      { name: "Sample MFI Partner (Illustrative — Demo Only)", lat: 28.6500, lng: 77.1200, status: "Ineligible (High Overdues)", npa: "Illustrative example", type: "NBFC-MFI" }
+    ];
+
+    // Institution Directory — sourced from the uploaded "Comprehensive Financial
+    // & Institutional Directory" PDF (public sector banks, regional rural banks,
+    // NBFC-MFIs, cooperative societies/banks, other central agencies, and State
+    // Channelising Agencies). Coordinates below are city/locality-level pins (the
+    // PDF only gives postal addresses, not lat/lng) so every entry drops a marker
+    // on the Leaflet map without needing any external geocoding API. Entries in the
+    // PDF with no address at all (e.g. AU/Ujjivan SFB head office rows, Konoklata
+    // Mahila Urban Cooperative Bank) are omitted rather than guessed.
+    const DIRECTORY_INSTITUTIONS = [
+      { type: "PSB", name: "Indian Overseas Bank", address: "Central Office, 763, Anna Salai, Chennai, Tamil Nadu 600002", lat: 13.0604, lng: 80.2496, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Bank of Baroda", address: "Baroda Bhavan, 7th Floor, R.C. Dutt Road, Vadodara 390007, Gujarat", lat: 22.3072, lng: 73.1812, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Canara Bank", address: "Head Office, 112, J.C. Road, Bengaluru 560002", lat: 12.9569, lng: 77.5851, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Punjab National Bank", address: "Plot No.4, Sector 10, Dwarka, New Delhi 110075", lat: 28.5921, lng: 77.046, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Punjab & Sind Bank", address: "Priority Sector Advance Department, 5th Floor, 21 Rajendra Place, New Delhi 110008", lat: 28.6448, lng: 77.1706, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Union Bank of India", address: "Union Bank Bhavan, Nariman Point, Mumbai, Maharashtra 400021", lat: 18.9256, lng: 72.8242, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Indian Bank", address: "Corporate Office, No.254-260, Avvai Shanmugam Salai, Royapettah, Chennai 600014", lat: 13.0567, lng: 80.2645, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Bank of Maharashtra", address: "Lok Mangal, 1501, Shivajinagar, Pune 411005, Maharashtra", lat: 18.5308, lng: 73.8474, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Bank of India", address: "Bandra Kurla Complex, Bandra (East), Mumbai 400051", lat: 19.0596, lng: 72.8656, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "Central Bank of India", address: "Chandermukhi Building, Nariman Point, Mumbai 400021", lat: 18.925, lng: 72.8258, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "PSB", name: "UCO Bank", address: "DD Block, Sector-1, Bidhannagar, Kolkata, West Bengal 700064", lat: 22.587, lng: 88.416, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Bihar Gramin Bank", address: "NH-30, New Bypass, Asochak, Patna, Bihar 800016", lat: 25.5941, lng: 85.1376, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Maharashtra Gramin Bank", address: "Jeewan Shri Town Centre, CIDCO, Aurangabad, Maharashtra 431003", lat: 19.8762, lng: 75.3433, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Jharkhand Gramin Bank", address: "Zila Parishad Market Complex, Kutchery Road, Ranchi, Jharkhand 834001", lat: 23.3441, lng: 85.3096, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Haryana Gramin Bank", address: "Near Bajrang Bhawan, Delhi Road, Rohtak, Haryana 124001", lat: 28.8955, lng: 76.6066, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Gujarat Gramin Bank", address: "Sky Line Building, Bharuch, Gujarat 392001", lat: 21.7051, lng: 72.9959, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Telangana Grameena Bank", address: "Nallakunta, Hyderabad, Telangana 500044", lat: 17.4009, lng: 78.5064, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Rajasthan Gramin Bank", address: "Tulsi Tower, 9th B Road, Sardarpura, Jodhpur, Rajasthan 342003", lat: 26.2775, lng: 73.0243, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Uttar Pradesh Gramin Bank", address: "NBCC Commercial Complex, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010", lat: 26.87, lng: 81.03, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Punjab Gramin Bank", address: "Jalandhar Road, Kapurthala, Punjab 144601", lat: 31.38, lng: 75.3806, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Uttarakhand Gramin Bank", address: "18 New Road, Dehradun, Uttarakhand", lat: 30.3165, lng: 78.0322, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Tripura Gramin Bank", address: "Airport Road, Abhaynagar, Agartala, Tripura 799005", lat: 23.8315, lng: 91.2868, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Karnataka Grameena Bank", address: "Vijayanagar 2nd Stage, Mysuru, Karnataka 570017", lat: 12.2958, lng: 76.6394, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Assam Gramin Bank", address: "G.S. Road, Bhangagarh, Guwahati, Assam 781005", lat: 26.1445, lng: 91.7362, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Andhra Pradesh Grameena Bank", address: "Raghu Mansion, Brodipet, Guntur, Andhra Pradesh 522002", lat: 16.3067, lng: 80.4365, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Kerala Grameena Bank", address: "KGPB Towers, AK Road, Malappuram, Kerala 676505", lat: 11.051, lng: 76.0711, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Tamil Nadu Grama Bank", address: "Yercaud Road, Hasthampatti, Salem, Tamil Nadu 636007", lat: 11.6643, lng: 78.146, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Madhya Pradesh Gramin Bank", address: "C21 Business Park, MR-10, Indore, Madhya Pradesh 452010", lat: 22.7196, lng: 75.8577, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Himachal Pradesh Gramin Bank", address: "Jail Road, Panjethi, Mandi, Himachal Pradesh 175001", lat: 31.708, lng: 76.9318, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Puducherry Grama Bank", address: "Mahatma Gandhi Road, Muthialpet, Puducherry 605003", lat: 11.9416, lng: 79.8083, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "West Bengal Gramin Bank", address: "Natabar Paul Road, Tikiapara, Howrah, West Bengal 711101", lat: 22.5958, lng: 88.2636, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Chhattisgarh Gramin Bank", address: "Sector-24, Atal Nagar, Nava Raipur, Chhattisgarh 492013", lat: 21.165, lng: 81.746, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Manipur Rural Bank", address: "Keishampat, Keisham Leikai, Imphal, Manipur 795001", lat: 24.817, lng: 93.9368, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Meghalaya Rural Bank", address: "Police Bazar, Shillong, Meghalaya 793001", lat: 25.5788, lng: 91.8933, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "J&K Grameen Bank", address: "Near Fruit Complex, Narwal, Jammu, Jammu and Kashmir 180006", lat: 32.7266, lng: 74.857, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Odisha Grameen Bank", address: "Jagamara, Sundarpada Road, Bhubaneswar, Odisha 751030", lat: 20.267, lng: 85.79, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "RRB", name: "Mizoram Rural Bank", address: "Khatla, Aizawl, Mizoram 796001", lat: 23.7271, lng: 92.7176, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Anik Financial Services Private Limited", address: "Ambajogai Road, Sai Naka, Latur, Maharashtra 413512", lat: 18.4088, lng: 76.5604, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Grameen Development & Finance Private Limited", address: "Kulshi Road, Chhaygaon, Kamrup, Assam 781124", lat: 26.1, lng: 91.47, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "ASA International Microfinance Ltd.", address: "Victoria Park, GN-37/2, Sector-V, Salt Lake City, Kolkata, West Bengal 700091", lat: 22.5809, lng: 88.4183, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Midland Microfin Ltd.", address: "BMC Chowk, G.T. Road, Jalandhar, Punjab 144001", lat: 31.326, lng: 75.5762, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Satin Creditcare Network Ltd.", address: "Udyog Vihar Phase III, Gurugram, Haryana 122016", lat: 28.4949, lng: 77.0871, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Pahal Financial Services Pvt. Ltd.", address: "Ambli-Iscon Road, Ahmedabad, Gujarat 380054", lat: 23.0225, lng: 72.509, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "NBFC-MFI", name: "Vector Finance Pvt Ltd", address: "Khandagiri, Bhubaneswar, Odisha 751029", lat: 20.27, lng: 85.77, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Cooperative Bank", name: "Streenidhi, Telangana", address: "My Home Sarovar Plaza, Secretariat Road, Saifabad, Hyderabad, Telangana 500004", lat: 17.4062, lng: 78.4691, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Cooperative Bank", name: "Streenidhi AP", address: "NTR Administrative Complex, Vijayawada, Andhra Pradesh 520013", lat: 16.5062, lng: 80.648, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Cooperative Bank", name: "Shri Mahila Sewa Sahakari Bank Ltd.", address: "Sakar-II, Ellisbridge, Ahmedabad, Gujarat 380006", lat: 23.0225, lng: 72.5714, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Other Agency", name: "North Eastern Development Finance Corporation Ltd. (NEDFi)", address: "GS Road, Dispur, Guwahati, Assam 781006", lat: 26.1433, lng: 91.7898, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Other Agency", name: "Jharkhand Silk Textile & Handicraft Development Corporation Ltd. (JHARCRAFT)", address: "DIC Campus, Ratu Road, Ranchi, Jharkhand 834001", lat: 23.3629, lng: 85.3346, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "Other Agency", name: "SIDBI", address: "SIDBI Tower, 15, Ashok Marg, Lucknow, Uttar Pradesh 226001", lat: 26.8467, lng: 80.9462, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Andhra Pradesh Scheduled Castes Cooperative Finance Corporation Ltd. (APSCCFC)", address: "SP River View Apartments, Tadepalli, Amaravathi, Andhra Pradesh 522501", lat: 16.482, lng: 80.531, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Andhra Pradesh State Financial Corporation (APSFC)", address: "APSFC Building, Industrial Estate, Vijayawada, Andhra Pradesh 520007", lat: 16.5062, lng: 80.648, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Assam State Development Corporation for SCs Ltd. (ASCDC)", address: "Sarumotoria, Dispur, Guwahati, Assam 781006", lat: 26.1433, lng: 91.7898, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Bihar State SCs Co-operative Development Corporation Ltd. (BSSCCDC)", address: "Bailey Road, Patna, Bihar 800001", lat: 25.6127, lng: 85.1414, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Chandigarh SCs, BCs & Minorities Financial & Development Corporation Ltd. (CSCFDC)", address: "Sector-17-C, Chandigarh 160017", lat: 30.7415, lng: 76.78, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Chhattisgarh State Antavasayee Sahkari Fin. & Dev. Corpn. (CGSCFDC)", address: "Naya Raipur, Chhattisgarh 492101", lat: 21.165, lng: 81.746, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Dadra & Nagar Haveli, Daman & Diu SCs/ST/OBCs & Minorities Financial & Development Corporation (DNDSFDC)", address: "New Collectorate Building, Silvassa, Dadra and Nagar Haveli 396230", lat: 20.2666, lng: 72.9964, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Delhi SC/ST/OBC/Minorities & Handicapped Financial & Development Corporation (DSFDC)", address: "Ambedkar Bhawan, Sector-16, Rohini, Delhi 110085", lat: 28.7132, lng: 77.118, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Gujarat SCs Development Corporation (GSCDC)", address: "Dr Jivraj Mehta Bhawan, Gandhinagar, Gujarat 382010", lat: 23.2237, lng: 72.6486, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Dr. Ambedkar Antyodaya Vikas Nigam (DAAVN)", address: "Karmayogi Bhavan, Sector-10/B, Gandhinagar, Gujarat", lat: 23.21, lng: 72.65, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Goa State SCs & OBCs Finance and Development Corporation Ltd. (GSCOBCDC)", address: "Patto Centre, Panaji, Goa 403001", lat: 15.493, lng: 73.818, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Haryana SCs Fin. and Development Corporation Ltd. (HSCDC)", address: "Sector 22-C, Chandigarh 160022", lat: 30.7333, lng: 76.7794, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Himachal Pradesh SCs & STs Development Corporation (HPSCSTDC)", address: "Kalyan Bhawan, Solan, Himachal Pradesh 173212", lat: 30.9045, lng: 77.0967, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Jharkhand State Scheduled Castes Cooperative Development Corporation (JSCDC)", address: "Balihar Road, Morabadi, Ranchi, Jharkhand 834008", lat: 23.36, lng: 85.32, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "J&K SCs, STs & OBCs Dev. Corpn. Ltd. (JKSCSTBCDC)", address: "Exchange Road, Srinagar, Jammu and Kashmir 190001", lat: 34.0837, lng: 74.7973, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Dr B. R. Ambedkar Development Corporation Ltd. (DBRADC)", address: "Visheshwariah Mini Tower, Dr Ambedkar Veedhi, Bengaluru 560001", lat: 12.9767, lng: 77.59, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Kerala State Development Corporation for SCs & STs Ltd. (KSDC)", address: "Town Hall Road, Thrissur, Kerala 680020", lat: 10.5276, lng: 76.2144, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Kerala State Women's Development Corporation (KSWDC)", address: "Transport Bhavan, KSRTC Building, East Fort, Attakulangara, Kerala 695023", lat: 8.4875, lng: 76.9525, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "MP State Cooperative SC Finance & Development Corporation (MPSCFDC)", address: "Rajiv Gandhi Bhawan, Shyamala Hills, Bhopal, Madhya Pradesh 462011", lat: 23.2494, lng: 77.4023, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Mahatma Phule BCs Development Corporation Ltd. (MPBCDC)", address: "Gulmohar Cross Road No.9, JVPD Scheme, Juhu, Mumbai 400049", lat: 19.1075, lng: 72.8263, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Sahityaratna Lokshahir Annabhau Sathe Development Corporation Ltd. (SLASDC)", address: "Chembur (E), Mumbai 400071", lat: 19.0522, lng: 72.9006, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Sant Rohidas Leather Industries & Charmakar Development Corporation Ltd. (LIDCOM)", address: "Veer Nariman Road, Mumbai 400001", lat: 18.935, lng: 72.8258, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Manipur Tribal Development Corporation Ltd. (MTDC)", address: "Lamphelpat, Imphal, Manipur 795004", lat: 24.79, lng: 93.89, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Manipur SCs & STs Co-operative Dev. Bank (MSTCB)", address: "Stadium Road, Imphal East, Manipur 795001", lat: 24.817, lng: 93.945, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Meghalaya Cooperative Apex Bank Ltd. (MCAB)", address: "M.G. Road, Shillong, Meghalaya 793001", lat: 25.5744, lng: 91.8789, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Mizoram Urban Cooperative Development Bank Ltd. (MUCO Bank)", address: "Zarkawt, Aizawl, Mizoram 796001", lat: 23.728, lng: 92.714, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Mizoram Khadi & Village Industries Board (MKVIB)", address: "Zarkawt, Aizawl, Mizoram 796007", lat: 23.73, lng: 92.715, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Odisha SCs & STs Dev. Finance Coop. Corpn. Ltd. (OSFDC)", address: "Lewis Road, Bhubaneswar, Odisha 751014", lat: 20.267, lng: 85.834, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Puducherry Adi Dravidar Dev. Corpn. Ltd. (PADCO)", address: "Thattanchavady, Puducherry 605009", lat: 11.925, lng: 79.83, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Punjab Scheduled Castes Land Development & Finance Corporation (PSCLDFC)", address: "Sector 17-C, Chandigarh 160017", lat: 30.7415, lng: 76.78, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Rajasthan SCs & STs Fin. & Dev. Coop. Corporation Ltd. (RSCDC)", address: "Nehru Sahakar Bhawan, Bhawani Singh Marg, Jaipur, Rajasthan 302005", lat: 26.905, lng: 75.809, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Sikkim SCs STs & Backward Classes Development Corporation (SSCSTBCDC)", address: "Bhanupath, Gangtok, Sikkim 737101", lat: 27.3389, lng: 88.6065, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Tamil Nadu Adi Dravidar Housing & Development Corporation Ltd. (TAHDCO)", address: "Cenotaph Road, Teynampet, Chennai, Tamil Nadu 600018", lat: 13.045, lng: 80.248, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Tripura Scheduled Castes Co-op. Devp. Corpn. Ltd. (TSCDC)", address: "Krishna Nagar, Lake Chowmuhani, Agartala, Tripura 799001", lat: 23.836, lng: 91.28, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "Uttarakhand Bahu-udeshiya Vitta Evam Vikas Nigam (UBVEVN)", address: "Bhagat Singh Colony, Adhoiwala, Dehradun, Uttarakhand 248001", lat: 30.32, lng: 78.045, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "UP Sahkari Gram Vikas Bank Ltd.", address: "10, Mall Avenue, Lucknow, Uttar Pradesh 226001", lat: 26.85, lng: 80.945, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "UP Scheduled Castes Finance & Dev. Corpn. Ltd. (UPSCFDC)", address: "Sector-C, Mahanagar, Lucknow, Uttar Pradesh 226006", lat: 26.872, lng: 80.926, status: "Eligible", npa: "Directory Listing (PDF)" },
+      { type: "SCA", name: "West Bengal SCs, STs & OBC Development & Finance Corporation (WBSCSTOBCDFC)", address: "Salt Lake Sector-I, Kolkata, West Bengal 700064", lat: 22.585, lng: 88.416, status: "Eligible", npa: "Directory Listing (PDF)" }
+    ];
+
+    // Merge the PDF directory straight into PARTNERS so every one of these
+    // locations shows up on the map immediately alongside the existing partners —
+    // no button, no API key, no extra step required.
+    PARTNERS = PARTNERS.concat(DIRECTORY_INSTITUTIONS);
+
+
+    // Real-Time Data Integration Function
+    async function fetchRealtimeGovData() {
+      const badge = document.getElementById("apiStatusBadge");
+      badge.innerText = "Data.gov.in Syncing...";
+      
+      try {
+        // Backend proxy (deployed on Render) — forwards to data.gov.in using the
+        // server-side API key. dataset can be 'banks' | 'microfinance' | 'schemes'.
+        const response = await fetch(`${API_BASE}/api/live-data?dataset=banks&limit=10`);
+        const data = await response.json();
+
+        if (data.status === 'fallback') {
+          console.warn('[data.gov.in] Using fallback data. Reason:', data.reason);
+        }
+
+        if (data.status === 'success' && data.records.length > 0) {
+          badge.innerText = `Data.gov.in Live (${data.records.length} Connected)`;
+          badge.className = "text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-mono font-bold";
+          
+          // Dynamically populate location points from central records.
+          // NOTE: real data.gov.in field names vary by dataset — hit
+          // ${API_BASE}/api/debug/gov-data once to see the actual keys for
+          // your resource IDs, then adjust the candidates below to match.
+          const livePartners = data.records
+            .map((rec, idx) => {
+              const lat = parseFloat(rec.latitude ?? rec.lat ?? rec.Latitude);
+              const lng = parseFloat(rec.longitude ?? rec.lng ?? rec.Longitude);
+              return {
+                name: rec.agency || rec.bank_name || rec.branch || rec.station || rec.title || `Govt Partner ${idx + 1}`,
+                lat, lng,
+                status: rec.status || "Eligible",
+                npa: rec.npa || "Not reported",
+                type: rec.type || rec.category || "Central Channel Partner",
+                _raw: rec // keep the raw record around for debugging / a details popup
+              };
+            })
+            // Only plot records that actually have real coordinates — no more
+            // random jitter faking a location the dataset didn't provide.
+            .filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lng));
+
+          if (livePartners.length > 0) {
+            PARTNERS = livePartners;
+            renderPartnerMarkers();
+          } else {
+            console.warn('[data.gov.in] Records came back but none had usable lat/lng — check field mapping via /api/debug/gov-data. Keeping existing partner list on the map.');
+            badge.innerText = `Data.gov.in Live (${data.records.length} records, no coordinates)`;
+          }
+        } else {
+          throw new Error("Proxy offline");
+        }
+      } catch (err) {
+        console.warn('[data.gov.in] Falling back to local demo data:', err.message);
+        badge.innerText = "Backend Engine: Active (Local Sync)";
+        badge.className = "text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-mono";
+      }
+    }
+
+    // --- UI Text Translations ---
+    const TRANSLATIONS = {
+      "en-IN": {
+        portalTitle: "Scheme Saathi",
+        portalSubtitle: "Concessional Credit Platform with AI & Voice Assistance",
+        loginBtn: "Login / Register",
+        demoBtn: "View Demo Account",
+        welcomeBack: "Welcome back,",
+        sqlSyncStatus: "SQL Sync Status:",
+        sqlConnected: "Connected (SQLite)",
+        logoutBtn: "Logout",
+        voiceHeading: "Hands-Free Voice Assistant",
+        voiceDesc: 'Click the mic and describe your project naturally (e.g., "I need a loan of 1 lakh 20 thousand for a small retail shop").',
+        speakBtn: "Speak Profile",
+        listeningBtn: "Listening...",
+        readAloudBtn: "Read Recommendations",
+        recommenderHeading: "1. Smart Scheme Eligibility Recommender",
+        backendActive: "Backend Engine: Active",
+        targetCategory: "Target Category",
+        optMicro: "Micro Finance Scheme (MFS)",
+        optTerm: "Term Loan Scheme (Large Project)",
+        optEducation: "Educational Loan Scheme (ELS)",
+        optAajeevika: "Aajeevika Micro-Finance (NBFC-MFI)",
+        optUny: "Udyam Nidhi Yojana (UNY)",
+        familyIncomeLabel: "Annual Household Income (₹)",
+        genderLabel: "Gender Concession",
+        optMale: "Male",
+        optFemale: "Female (0.5% Interest Rebate)",
+        evaluateBtn: "Evaluate Eligibility & Schemes",
+        saveBtn: "💾 Save Application",
+        emiHeading: "2. Scheme Quarterly EMI & Moratorium Calculator",
+        eligiblePrincipal: "Eligible Loan Principal",
+        principalNote: "(90% of Project Cost)",
+        appliedRate: "Applied Concessional Interest",
+        rateNote: "(NSFDC Subsidized Rate)",
+        tenureLabel: "Repayment Tenure (Years)",
+        yearsWord: "Years",
+        oneYear: "1 Year",
+        twelveYears: "12 Years",
+        moratoriumLabel: "Moratorium Period (Grace Months)",
+        moratorium3: "3 Months (Micro Finance Standard)",
+        moratorium6: "6 Months (Term Loan Standard)",
+        moratorium12: "12 Months (Construction/Education)",
+        quarterlyEmiLabel: "Quarterly EMI Installment:",
+        totalInterestLabel: "Total Accrued Interest:",
+        totalPaymentLabel: "Total Payable Amount:",
+        locatorHeading: "3. Nearby Eligible Channel Partners",
+        npaFilter: "Verified Partner Directory",
+        locatorDesc: "Shows verified state agencies, banks, and MFIs near you. Partner tier shown is our own curated designation, not a published credit/NPA disclosure.",
+        activePartner: "Active Channel Partner",
+        restrictedPartner: "Restricted / Not Recommended",
+        locateMeBtn: "Use My Location",
+        nearestHeading: "Nearest Partners to You",
+        distanceLabel: "Distance:",
+        locating: "Finding your location...",
+        geoNotSupported: "Location access is not supported in this browser.",
+        geoDenied: "Location access denied. Please enable location permissions and try again.",
+        yourLocation: "Your Location",
+        savedAppsHeading: "Saved Applications Database (SQL Store)",
+        thAppId: "App ID",
+        thUser: "User / Applicant",
+        thScheme: "Recommended Scheme",
+        thCost: "Project Cost",
+        thLoan: "Loan Sanction (90%)",
+        thEmi: "Quarterly EMI",
+        thStatus: "Status",
+        noAppsRow: 'No applications saved yet. Authenticate and click "Save Application".',
+        authHeading: "Beneficiary Portal Authentication",
+        fullNameLabel: "Full Name",
+        emailLabel: "Gmail Address",
+        incomeLabel: "Annual Household Income (₹)",
+        incomeAutofillNote: "Saved to your profile so you won't need to re-enter it each time.",
+        passwordLabel: "Portal Password",
+        passwordSecurityNote: "⚠️ Create a password just for this portal — never enter your real Gmail password here.",
+        authNote: "Registers or logs you in against a real SQLite-backed API, with bcrypt-hashed passwords ⁠— no plaintext passwords are stored.",
+        authSubmitBtn: "Login / Register Account",
+        incomeCapMsg: "🚫 Income Cap Exceeded: Annual household income must be within ₹3.00 Lakhs to qualify for NSFDC concessional credit.",
+        recommendedMatch: "Recommended Match",
+        interestSubsidized: "Interest Subsidized",
+        maxLoanCoverage: "Max Loan Coverage (90%):",
+        interestRateLine: "Interest Rate:",
+        femaleConcessionNote: "(0.5% Female Concession Applied)",
+        applyNowBtn: "Click here to Apply (PM SURAJ Portal)",
+        applyNowNote: "Submit your real application to NSFDC through the Government of India's PM SURAJ portal.",
+        loginFirstAlert: "Please login first to save applications to the database.",
+        saveSuccessAlert: "Application record inserted into SQL database successfully!",
+        statusSubmitted: "Submitted to SCA",
+        statusUnderReview: "Under Review",
+        statusApproved: "Approved & Disbursed",
+        welcomeVoiceMsg: "Welcome {name}. You are logged in.",
+        speechRecognizedMsg: "Speech recognized. Scheme recommended automatically.",
+        speechNotSupported: "Web Speech API is not supported in this browser. Please use Google Chrome or Edge.",
+        accountActive: "Account Active"
+      },
+      "hi-IN": {
+        portalTitle: "स्कीम साथी",
+        portalSubtitle: "एआई और वॉयस सहायता के साथ रियायती ऋण मंच",
+        loginBtn: "लॉगिन / पंजीकरण",
+        demoBtn: "डेमो खाता देखें",
+        welcomeBack: "वापसी पर स्वागत है,",
+        sqlSyncStatus: "एसक्यूएल सिंक स्थिति:",
+        sqlConnected: "कनेक्टेड (SQLite)",
+        logoutBtn: "लॉगआउट",
+        voiceHeading: "हैंड्स-फ्री वॉयस असिस्टेंट",
+        voiceDesc: 'माइक पर क्लिक करें और अपनी परियोजना का स्वाभाविक रूप से वर्णन करें (जैसे, "मुझे एक छोटी दुकान के लिए 1 लाख 20 हज़ार का ऋण चाहिए")।',
+        speakBtn: "प्रोफ़ाइल बोलें",
+        listeningBtn: "सुन रहा है...",
+        readAloudBtn: "सिफारिशें पढ़ें",
+        recommenderHeading: "1. स्मार्ट योजना पात्रता अनुशंसाकर्ता",
+        backendActive: "बैकएंड इंजन: सक्रिय",
+        targetCategory: "लक्षित श्रेणी",
+        optMicro: "सूक्ष्म वित्त योजना (एमएफएस)",
+        optTerm: "टर्म ऋण योजना (बड़ी परियोजना)",
+        optEducation: "शैक्षिक ऋण योजना (ईएलएस)",
+        optAajeevika: "आजीविका सूक्ष्म वित्त (एनबीएफसी-एमएफआई)",
+        optUny: "उद्यम निधि योजना (यूएनवाई)",
+        familyIncomeLabel: "वार्षिक पारिवारिक आय (₹)",
+        genderLabel: "लिंग रियायत",
+        optMale: "पुरुष",
+        optFemale: "महिला (0.5% ब्याज छूट)",
+        evaluateBtn: "पात्रता और योजनाओं का मूल्यांकन करें",
+        saveBtn: "💾 आवेदन सहेजें",
+        emiHeading: "2. योजना त्रैमासिक ईएमआई और अधिस्थगन कैलकुलेटर",
+        eligiblePrincipal: "पात्र ऋण मूलधन",
+        principalNote: "(परियोजना लागत का 90%)",
+        appliedRate: "लागू रियायती ब्याज",
+        rateNote: "(एनएसएफडीसी सब्सिडी दर)",
+        tenureLabel: "पुनर्भुगतान अवधि (वर्ष)",
+        yearsWord: "वर्ष",
+        oneYear: "1 वर्ष",
+        twelveYears: "12 वर्ष",
+        moratoriumLabel: "अधिस्थगन अवधि (छूट माह)",
+        moratorium3: "3 महीने (सूक्ष्म वित्त मानक)",
+        moratorium6: "6 महीने (टर्म ऋण मानक)",
+        moratorium12: "12 महीने (निर्माण/शिक्षा)",
+        quarterlyEmiLabel: "त्रैमासिक ईएमआई किस्त:",
+        totalInterestLabel: "कुल संचित ब्याज:",
+        totalPaymentLabel: "कुल देय राशि:",
+        locatorHeading: "3. निकटवर्ती पात्र चैनल भागीदार",
+        npaFilter: "सत्यापित भागीदार निर्देशिका",
+        locatorDesc: "आपके निकट सत्यापित राज्य एजेंसियों, बैंकों और एमएफआई को दिखाता है। भागीदार स्तर हमारा अपना क्यूरेटेड वर्गीकरण है, न कि कोई प्रकाशित एनपीए जानकारी।",
+        activePartner: "सक्रिय चैनल भागीदार",
+        restrictedPartner: "प्रतिबंधित / अनुशंसित नहीं",
+        locateMeBtn: "मेरा स्थान उपयोग करें",
+        nearestHeading: "आपके निकटतम भागीदार",
+        distanceLabel: "दूरी:",
+        locating: "आपका स्थान खोजा जा रहा है...",
+        geoNotSupported: "इस ब्राउज़र में स्थान की सुविधा समर्थित नहीं है।",
+        geoDenied: "स्थान की पहुँच अस्वीकृत की गई। कृपया स्थान अनुमति सक्षम करें और पुनः प्रयास करें।",
+        yourLocation: "आपका स्थान",
+        savedAppsHeading: "सहेजे गए आवेदन डेटाबेस (एसक्यूएल स्टोर)",
+        thAppId: "आवेदन आईडी",
+        thUser: "उपयोगकर्ता / आवेदक",
+        thScheme: "अनुशंसित योजना",
+        thCost: "परियोजना लागत",
+        thLoan: "ऋण स्वीकृति (90%)",
+        thEmi: "त्रैमासिक ईएमआई",
+        thStatus: "स्थिति",
+        noAppsRow: 'अभी तक कोई आवेदन सहेजा नहीं गया है। लॉगिन करें और "आवेदन सहेजें" पर क्लिक करें।',
+        authHeading: "लाभार्थी पोर्टल प्रमाणीकरण",
+        fullNameLabel: "पूरा नाम",
+        emailLabel: "जीमेल पता",
+        incomeLabel: "वार्षिक पारिवारिक आय (₹)",
+        incomeAutofillNote: "आपकी प्रोफ़ाइल में सहेजा गया ताकि आपको इसे बार-बार दर्ज न करना पड़े।",
+        passwordLabel: "पोर्टल पासवर्ड",
+        passwordSecurityNote: "⚠️ केवल इस पोर्टल के लिए एक पासवर्ड बनाएं — यहां कभी भी अपना असली जीमेल पासवर्ड न डालें।",
+        authNote: "bcrypt बैकएंड के माध्यम से उपयोगकर्ता पंजीकरण और एसक्यूएल पासवर्ड हैशिंग का अनुकरण करता है।",
+        authSubmitBtn: "लॉगिन / खाता पंजीकृत करें",
+        incomeCapMsg: "🚫 आय सीमा पार: एनएसएफडीसी रियायती ऋण के लिए पात्र होने हेतु वार्षिक पारिवारिक आय ₹3.00 लाख के भीतर होनी चाहिए।",
+        recommendedMatch: "अनुशंसित मिलान",
+        interestSubsidized: "ब्याज सब्सिडीयुक्त",
+        maxLoanCoverage: "अधिकतम ऋण कवरेज (90%):",
+        interestRateLine: "ब्याज दर:",
+        femaleConcessionNote: "(0.5% महिला रियायत लागू)",
+        applyNowBtn: "आवेदन करने के लिए यहाँ क्लिक करें (पीएम सूरज पोर्टल)",
+        applyNowNote: "भारत सरकार के पीएम सूरज पोर्टल के माध्यम से एनएसएफडीसी को अपना वास्तविक आवेदन जमा करें।",
+        loginFirstAlert: "डेटाबेस में आवेदन सहेजने के लिए कृपया पहले लॉगिन करें।",
+        saveSuccessAlert: "आवेदन रिकॉर्ड सफलतापूर्वक एसक्यूएल डेटाबेस में जोड़ा गया!",
+        statusSubmitted: "एससीए को सबमिट किया गया",
+        statusUnderReview: "समीक्षाधीन",
+        statusApproved: "स्वीकृत एवं वितरित",
+        welcomeVoiceMsg: "स्वागत है {name}। आप लॉग इन हैं।",
+        speechRecognizedMsg: "आवाज़ पहचानी गई। योजना स्वतः अनुशंसित की गई।",
+        speechNotSupported: "इस ब्राउज़र में वेब स्पीच एपीआई समर्थित नहीं है। कृपया Google Chrome या Edge का उपयोग करें।",
+        accountActive: "खाता सक्रिय"
+      }
+    };
+
+    // State Variables
+    const API_BASE = 'https://ai-scheme-matching-kfaw.onrender.com';
+    let activeScheme = SCHEMES.micro;
+    let activeLoanAmount = 0;
+    let activeInterestRate = 0;
+    let currentUser = null;
+    let authToken = localStorage.getItem('nsfdc_token') || null;
+    let isRecording = false;
+    let speechRecognitionInstance = null;
+    let savedApplications = [];
+
+    function authHeaders() {
+      return authToken ? { 'Authorization': `Bearer ${authToken}` } : {};
+    }
+
+    async function restoreSession() {
+      if (!authToken) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/me`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Session expired');
+        const data = await res.json();
+        currentUser = data.user;
+        document.getElementById("loggedInUserName").innerText = currentUser.name;
+        document.getElementById("userProfileBanner").classList.remove("hidden");
+        document.getElementById("authBtn").innerText = t("accountActive");
+        document.getElementById("familyIncome").value = currentUser.income;
+        recommendScheme();
+        await loadApplicationsFromServer();
+      } catch (err) {
+        console.warn('[Auth] Stored session invalid, clearing it.', err.message);
+        authToken = null;
+        localStorage.removeItem('nsfdc_token');
+      }
+    }
+
+    function t(key) {
+      const lang = document.getElementById("langSelect").value;
+      return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS["en-IN"][key] || key;
+    }
+
+    function currentLang() {
+      return document.getElementById("langSelect").value;
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = currentLang() === "hi-IN" ? "hi" : "en";
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        const val = t(key);
+        if (val) el.innerText = val;
+      });
+      if (activeLoanAmount > 0) {
+        recommendScheme();
+      }
+      if (savedApplications.length > 0) {
+        renderSQLApplicationsTable();
+      }
+      if (!currentUser) {
+        document.getElementById("authBtn").innerText = t("loginBtn");
+      } else {
+        document.getElementById("authBtn").innerText = t("accountActive");
+      }
+      const micStatus = document.getElementById("micStatusText");
+      if (!isRecording) micStatus.innerText = t("speakBtn");
+    }
+
+    // --- Scheme Recommendation Engine ---
+    function recommendScheme() {
+      const category = document.getElementById("projectCategory").value;
+      const cost = parseFloat(document.getElementById("projectCost").value) || 0;
+      const income = parseFloat(document.getElementById("familyIncome").value) || 0;
+      const isFemale = document.getElementById("gender").value === "female";
+      const lang = currentLang();
+
+      const resBox = document.getElementById("schemeResult");
+
+      // NSFDC's published eligibility rule (nsfdc.nic.in FAQ + "How to Apply" page,
+      // verified 2026-09): annual family income must be up to ₹3.00 lakh, uniformly
+      // for rural and urban applicants. (Previously coded here as ₹5,00,000 — corrected.)
+      if (income > 300000) {
+        resBox.innerHTML = `
+          <div class="p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm font-semibold">
+            ${t("incomeCapMsg")}
+          </div>`;
+        return;
+      }
+
+      activeScheme = SCHEMES[category];
+      activeLoanAmount = Math.min(cost * activeScheme.loanPct, activeScheme.maxCost * activeScheme.loanPct);
+      activeInterestRate = isFemale ? activeScheme.baseRate - 0.5 : activeScheme.baseRate;
+
+      const schemeName = lang === "hi-IN" ? activeScheme.nameHi : activeScheme.name;
+
+      resBox.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="bg-indigo-600 text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-bold">${t("recommendedMatch")}</span>
+          <span class="text-xs text-indigo-700 font-semibold">${t("interestSubsidized")}</span>
+        </div>
+        <h3 class="font-bold text-slate-800 text-lg">${schemeName}</h3>
+        <p class="text-xs text-slate-600">${t("maxLoanCoverage")} <strong>₹${activeLoanAmount.toLocaleString('en-IN')}</strong></p>
+        <p class="text-xs text-slate-600">${t("interestRateLine")} <strong>${activeInterestRate}% p.a.</strong> ${isFemale ? `<span class="text-emerald-700 font-bold">${t("femaleConcessionNote")}</span>` : ''}</p>
+        <div class="mt-3 pt-3 border-t border-indigo-100">
+          <a href="https://pmsuraj.dosje.gov.in/login" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">
+            🔗 ${t("applyNowBtn")}
+          </a>
+          <p class="text-[11px] text-slate-500 mt-1">${t("applyNowNote")}</p>
+        </div>
+      `;
+
+      document.getElementById("tenure").max = activeScheme.maxTenure;
+      document.getElementById("tenure").value = activeScheme.maxTenure;
+      document.getElementById("tenureVal").innerHTML = `${activeScheme.maxTenure} <span data-i18n="yearsWord">${t("yearsWord")}</span>`;
+      document.getElementById("moratorium").value = activeScheme.defaultMoratorium;
+
+      calculateEMI();
+    }
+
+    // --- Financial Quarterly EMI Calculator ---
+    function calculateEMI() {
+      const tenureYears = parseInt(document.getElementById("tenure").value);
+      document.getElementById("tenureVal").innerHTML = `${tenureYears} <span data-i18n="yearsWord">${t("yearsWord")}</span>`;
+      
+      const P = activeLoanAmount;
+      const annualRate = activeInterestRate;
+      
+      document.getElementById("principalVal").innerText = `₹${P.toLocaleString('en-IN')}`;
+      document.getElementById("rateVal").innerText = `${annualRate}% p.a.`;
+
+      if (P <= 0) return;
+
+      const totalQuarters = tenureYears * 4;
+      const r = (annualRate / 100) / 4;
+
+      const quarterlyEMI = (P * r * Math.pow(1 + r, totalQuarters)) / (Math.pow(1 + r, totalQuarters) - 1);
+      const totalPayment = quarterlyEMI * totalQuarters;
+      const totalInterest = totalPayment - P;
+
+      document.getElementById("quarterlyEmi").innerText = `₹${Math.round(quarterlyEMI).toLocaleString('en-IN')}`;
+      document.getElementById("totalInterest").innerText = `₹${Math.round(totalInterest).toLocaleString('en-IN')}`;
+      document.getElementById("totalPayment").innerText = `₹${Math.round(totalPayment).toLocaleString('en-IN')}`;
+    }
+
+    // --- Voice Features ---
+    function toggleVoiceInput() {
+      const micBtn = document.getElementById("micBtn");
+      const micStatus = document.getElementById("micStatusText");
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert(t("speechNotSupported"));
+        return;
+      }
+
+      if (isRecording) {
+        speechRecognitionInstance.stop();
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = t("speakBtn");
+        return;
+      }
+
+      speechRecognitionInstance = new SpeechRecognition();
+      const selectedLang = document.getElementById("langSelect").value;
+      speechRecognitionInstance.lang = selectedLang;
+      speechRecognitionInstance.interimResults = false;
+
+      speechRecognitionInstance.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add("recording-pulse");
+        micStatus.innerText = t("listeningBtn");
+      };
+
+      speechRecognitionInstance.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        parseSpokenInput(transcript);
+        
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = t("speakBtn");
+      };
+
+      speechRecognitionInstance.onerror = () => {
+        isRecording = false;
+        micBtn.classList.remove("recording-pulse");
+        micStatus.innerText = t("speakBtn");
+      };
+
+      speechRecognitionInstance.start();
+    }
+
+    function parseSpokenInput(text) {
+      if (text.includes("education") || text.includes("study") || text.includes("college") || text.includes("शिक्षा") || text.includes("पढ़ाई")) {
+        document.getElementById("projectCategory").value = "education";
+      } else if (text.includes("term") || text.includes("large") || text.includes("factory") || text.includes("फैक्ट्री")) {
+        document.getElementById("projectCategory").value = "term";
+      } else if (text.includes("mfi") || text.includes("aajeevika") || text.includes("आजीविका")) {
+        document.getElementById("projectCategory").value = "aajeevika";
+      } else if (text.includes("udyam") || text.includes("uny") || text.includes("उद्यम")) {
+        document.getElementById("projectCategory").value = "uny";
+      } else {
+        document.getElementById("projectCategory").value = "micro";
+      }
+
+      const matches = text.match(/\d+/g);
+      if (matches && matches.length > 0) {
+        let extractedVal = parseInt(matches[0]);
+        if (text.includes("lakh") || text.includes("lac") || text.includes("लाख")) {
+          extractedVal *= 100000;
+        } else if (text.includes("thousand") || text.includes("हज़ार") || text.includes("हजार")) {
+          extractedVal *= 1000;
+        }
+        document.getElementById("projectCost").value = extractedVal;
+      }
+      if (text.includes("female") || text.includes("woman") || text.includes("lady") || text.includes("महिला")) {
+        document.getElementById("gender").value = "female";
+      }
+      recommendScheme();
+      announceVoiceMessage(t("speechRecognizedMsg"));
+    }
+
+    function speakCurrentRecommendation() {
+      const lang = currentLang();
+      const schemeName = lang === "hi-IN" ? activeScheme.nameHi : activeScheme.name;
+      const text = lang === "hi-IN"
+        ? `आप ${schemeName} के लिए पात्र हैं। अधिकतम ऋण कवरेज ${activeLoanAmount} रुपये है, ${activeInterestRate} प्रतिशत वार्षिक ब्याज दर पर।`
+        : `You are eligible for the ${schemeName}. Maximum loan coverage is ${activeLoanAmount} rupees at an interest rate of ${activeInterestRate} percent per annum.`;
+      announceVoiceMessage(text);
+    }
+
+    function announceVoiceMessage(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = document.getElementById("langSelect").value;
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function toggleAuthModal() {
+      document.getElementById("authModal").classList.toggle("hidden");
+    }
+
+    const DEMO_EMAIL = "demo@schemesaathi.in";
+    const DEMO_PASSWORD = "Demo@1234";
+
+    async function loginAsDemo() {
+      const demoBtn = document.getElementById("demoBtn");
+      const originalLabel = demoBtn.innerText;
+      demoBtn.disabled = true;
+      demoBtn.innerText = "...";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: DEMO_EMAIL, password: DEMO_PASSWORD })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Couldn't load the demo account.");
+          return;
+        }
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem('nsfdc_token', authToken);
+
+        document.getElementById("loggedInUserName").innerText = currentUser.name;
+        document.getElementById("userProfileBanner").classList.remove("hidden");
+        document.getElementById("authBtn").innerText = t("accountActive");
+
+        document.getElementById("familyIncome").value = currentUser.income;
+        recommendScheme();
+        await loadApplicationsFromServer();
+        announceVoiceMessage(t("welcomeVoiceMsg").replace("{name}", currentUser.name));
+      } catch (err) {
+        console.error('[Demo Login Error]', err);
+        alert("Couldn't reach the server. Is the backend running on http://localhost:3000?");
+      } finally {
+        demoBtn.disabled = false;
+        demoBtn.innerText = originalLabel;
+      }
+    }
+
+    async function handleAuthSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("authName").value;
+      const email = document.getElementById("authEmail").value;
+      const password = document.getElementById("authPassword").value;
+      const income = parseFloat(document.getElementById("authIncome").value) || 0;
+
+      const submitBtn = document.querySelector('#authForm button[type="submit"]');
+      const originalLabel = submitBtn.innerText;
+      submitBtn.disabled = true;
+      submitBtn.innerText = t("authSubmitBtn") + "...";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, income })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Login failed. Please check your credentials.");
+          return;
+        }
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem('nsfdc_token', authToken);
+
+        document.getElementById("loggedInUserName").innerText = currentUser.name;
+        document.getElementById("userProfileBanner").classList.remove("hidden");
+        document.getElementById("authBtn").innerText = t("accountActive");
+
+        document.getElementById("familyIncome").value = currentUser.income;
+        recommendScheme();
+        await loadApplicationsFromServer();
+
+        toggleAuthModal();
+        document.getElementById("authForm").reset();
+        announceVoiceMessage(t("welcomeVoiceMsg").replace("{name}", currentUser.name));
+      } catch (err) {
+        console.error('[Auth Error]', err);
+        alert("Couldn't reach the server. Is the backend running on http://localhost:3000?");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalLabel;
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      authToken = null;
+      localStorage.removeItem('nsfdc_token');
+      savedApplications = [];
+      renderSQLApplicationsTable();
+      document.getElementById("userProfileBanner").classList.add("hidden");
+      document.getElementById("authBtn").innerText = t("loginBtn");
+    }
+
+    async function saveApplicationToSQL() {
+      if (!currentUser) {
+        alert(t("loginFirstAlert"));
+        toggleAuthModal();
+        return;
+      }
+      const emiVal = document.getElementById("quarterlyEmi").innerText;
+      const schemeName = activeScheme.name;
+      const schemeNameHi = activeScheme.nameHi;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/applications`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
+          body: JSON.stringify({
+            schemeKey: Object.keys(SCHEMES).find(k => SCHEMES[k] === activeScheme) || 'unknown',
+            schemeName,
+            schemeNameHi,
+            projectCost: parseFloat(document.getElementById("projectCost").value),
+            loanAmount: activeLoanAmount,
+            emi: emiVal
+          })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          if (res.status === 401) {
+            alert(t("loginFirstAlert"));
+            logout();
+            toggleAuthModal();
+            return;
+          }
+          alert(data.message || "Couldn't save the application.");
+          return;
+        }
+
+        await loadApplicationsFromServer();
+        alert(t("saveSuccessAlert"));
+      } catch (err) {
+        console.error('[Save Application Error]', err);
+        alert("Couldn't reach the server. Is the backend running on http://localhost:3000?");
+      }
+    }
+
+    async function loadApplicationsFromServer() {
+      if (!authToken) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/applications`, { headers: authHeaders() });
+        if (!res.ok) throw new Error('Failed to load applications');
+        const data = await res.json();
+        savedApplications = data.applications.map(row => ({
+          id: row.id,
+          user: currentUser ? currentUser.name : '',
+          schemeName: row.scheme_name,
+          schemeNameHi: row.scheme_name_hi,
+          costVal: row.project_cost,
+          loanVal: row.loan_amount,
+          emi: row.emi,
+          statusKey: row.status
+        }));
+        renderSQLApplicationsTable();
+      } catch (err) {
+        console.error('[Load Applications Error]', err);
+      }
+    }
+
+    function renderSQLApplicationsTable() {
+      const tbody = document.getElementById("sqlApplicationsTable");
+      if (!tbody) return;
+      if (savedApplications.length === 0) {
+        tbody.innerHTML = '';
+        return;
+      }
+      const lang = currentLang();
+
+      const statusClasses = {
+        statusSubmitted: "bg-amber-100 text-amber-800",
+        statusUnderReview: "bg-blue-100 text-blue-800",
+        statusApproved: "bg-emerald-100 text-emerald-800"
+      };
+
+      tbody.innerHTML = savedApplications.map(app => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-2.5 font-mono font-bold text-indigo-700">${app.id}</td>
+          <td class="p-2.5">${app.user}</td>
+          <td class="p-2.5 font-semibold">${lang === "hi-IN" ? app.schemeNameHi : app.schemeName}</td>
+          <td class="p-2.5">₹${app.costVal.toLocaleString('en-IN')}</td>
+          <td class="p-2.5 text-emerald-700 font-bold">₹${app.loanVal.toLocaleString('en-IN')}</td>
+          <td class="p-2.5 font-semibold">${app.emi}</td>
+          <td class="p-2.5"><span class="${statusClasses[app.statusKey] || 'bg-amber-100 text-amber-800'} px-2 py-0.5 rounded text-xs font-bold">${t(app.statusKey)}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    // --- Geo-Spatial Mapping ---
+    let mapInstance = null;
+    let userMarker = null;
+    let partnerMarkerObjects = [];
+
+    function distanceKm(lat1, lng1, lat2, lng2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLng = (lng2 - lng1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function initMap() {
+      mapInstance = L.map('map').setView([28.6139, 77.2090], 11);
+
+      // Using CARTO's free basemap tiles instead of OpenStreetMap's own
+      // tile.openstreetmap.org servers — those are volunteer-run and block
+      // apps that don't strictly match their usage policy (osm.wiki/Blocked),
+      // which is what caused the "Access blocked" tiles. CARTO's tiles are
+      // still built from OpenStreetMap data and are meant for exactly this
+      // kind of app, so they don't have that restriction.
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(mapInstance);
+
+      renderPartnerMarkers();
+
+      // Leaflet fix: if #map is measured before its parent flex/grid card has
+      // finished laying out (fonts loading, Tailwind CDN applying classes,
+      // etc.), Leaflet caches the wrong container size and the tiles render
+      // blank/grey or only fill part of the box. Nudging it with
+      // invalidateSize() once the rest of the page has settled forces it to
+      // re-measure and redraw correctly.
+      setTimeout(() => mapInstance.invalidateSize(), 300);
+      window.addEventListener('resize', () => mapInstance.invalidateSize());
+    }
+
+    function renderPartnerMarkers() {
+      // Clear existing markers
+      partnerMarkerObjects.forEach(obj => mapInstance.removeLayer(obj.marker));
+      partnerMarkerObjects = [];
+
+      PARTNERS.forEach(partner => {
+        const isEligible = partner.status.includes("Eligible");
+        const color = isEligible ? "green" : "red";
+        const circle = L.circleMarker([partner.lat, partner.lng], {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.8,
+          radius: 8
+        }).addTo(mapInstance);
+
+        circle.bindPopup(buildPartnerPopup(partner));
+        partnerMarkerObjects.push({ marker: circle, partner });
+      });
+    }
+
+    function buildPartnerPopup(partner, distance) {
+      const isEligible = partner.status.includes("Eligible");
+      const distanceLine = (typeof distance === "number")
+        ? `${t("distanceLabel")} <b>${distance.toFixed(1)} km</b><br/>`
+        : "";
+      return `
+        <div class="text-xs">
+          <strong class="text-sm">${partner.name}</strong><br/>
+          ${distanceLine}
+          Institutional Category: <b>${partner.type}</b><br/>
+          Partner Tier: <b>${partner.npa}</b><br/>
+          Status: <span class="${isEligible ? 'text-green-700' : 'text-red-600'} font-bold">${partner.status}</span>
+        </div>
+      `;
+    }
+
+    function locateUser() {
+      const statusEl = document.getElementById("locateStatus");
+      if (!navigator.geolocation) {
+        statusEl.innerText = t("geoNotSupported");
+        return;
+      }
+      statusEl.innerText = t("locating");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLng = position.coords.longitude;
+          statusEl.innerText = "";
+          renderUserLocation(userLat, userLng);
+        },
+        (err) => {
+          statusEl.innerText = t("geoDenied");
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    function renderUserLocation(userLat, userLng) {
+      if (userMarker) {
+        mapInstance.removeLayer(userMarker);
+      }
+      userMarker = L.marker([userLat, userLng], {
+        icon: L.divIcon({
+          className: '',
+          html: '<div style="background:#4338ca;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 2px #4338ca;"></div>',
+          iconSize: [20, 20],
+          iconAnchor: [10, 10]
+        })
+      }).addTo(mapInstance);
+      userMarker.bindPopup(t("yourLocation")).openPopup();
+
+      const withDistance = PARTNERS.map(p => ({
+        partner: p,
+        distance: distanceKm(userLat, userLng, p.lat, p.lng)
+      })).sort((a, b) => a.distance - b.distance);
+
+      partnerMarkerObjects.forEach(pm => {
+        const match = withDistance.find(w => w.partner === pm.partner);
+        if (match) pm.marker.setPopupContent(buildPartnerPopup(pm.partner, match.distance));
+      });
+
+      const bounds = L.latLngBounds([[userLat, userLng], ...PARTNERS.map(p => [p.lat, p.lng])]);
+      mapInstance.fitBounds(bounds, { padding: [30, 30] });
+
+      renderNearestPartnersList(withDistance);
+    }
+
+    function renderNearestPartnersList(withDistance) {
+      const listWrap = document.getElementById("nearestPartnersList");
+      const itemsEl = document.getElementById("nearestPartnersItems");
+      listWrap.classList.remove("hidden");
+
+      itemsEl.innerHTML = withDistance.map(({ partner, distance }) => {
+        const isEligible = partner.status.includes("Eligible");
+        return `
+          <div class="flex items-center justify-between text-xs p-2 rounded-lg border ${isEligible ? 'border-green-100 bg-green-50' : 'border-red-100 bg-red-50'}">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full ${isEligible ? 'bg-green-600' : 'bg-red-600'} inline-block"></span>
+              <span class="font-semibold text-slate-700">${partner.name}</span>
+            </div>
+            <span class="font-bold ${isEligible ? 'text-green-700' : 'text-red-600'}">${distance.toFixed(1)} km</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.onload = () => {
+      recommendScheme();
+      initMap();
+      applyLanguage();
+      fetchRealtimeGovData(); // Synchronizes with data.gov.in proxy backend
+      restoreSession(); // Re-authenticate using a saved token, if any
+    };
+  </script>
+</body>
+</html>
